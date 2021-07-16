@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="DetailImageCell" customModule="pkh0225" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" contentInsetAdjustmentBehavior="never" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-d8-gZU">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="contentLayoutGuide" id="c8T-11-eNv"/>
+                        <viewLayoutGuide key="frameLayoutGuide" id="Pkj-Tl-4zH"/>
+                        <connections>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="2im-yl-caA"/>
+                        </connections>
+                    </scrollView>
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vee-pi-CYM">
+                        <rect key="frame" x="14" y="14" width="22" height="22"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="6st-Hh-VWE"/>
+                            <constraint firstAttribute="width" constant="22" id="HkX-C7-bQb"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="11"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kA3-MA-A9M">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="1rI-qh-ZmB"/>
+                            <constraint firstAttribute="height" constant="50" id="ybS-Gv-R6m"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <state key="normal" title="○"/>
+                        <state key="selected" title="●"/>
+                        <connections>
+                            <action selector="onSelectedButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="s2S-Uz-4Vj"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWo-Ka-KKH">
+                        <rect key="frame" x="21" y="16.5" width="8" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="14"/>
+                        <color key="textColor" systemColor="systemOrangeColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="1 / 30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJM-uT-0Qx">
+                        <rect key="frame" x="15" y="270.5" width="31.5" height="14.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.029999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="IWo-Ka-KKH" firstAttribute="centerX" secondItem="vee-pi-CYM" secondAttribute="centerX" id="HTk-zL-CdD"/>
+                <constraint firstItem="VJM-uT-0Qx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="LeL-TF-o9q"/>
+                <constraint firstAttribute="bottom" secondItem="VJM-uT-0Qx" secondAttribute="bottom" constant="15" id="NTZ-nU-g50"/>
+                <constraint firstItem="kA3-MA-A9M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TVv-on-xdK"/>
+                <constraint firstItem="3fE-d8-gZU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="atW-Ok-zfa"/>
+                <constraint firstAttribute="bottom" secondItem="3fE-d8-gZU" secondAttribute="bottom" id="beh-HC-CTH"/>
+                <constraint firstItem="3fE-d8-gZU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bsg-y6-0HU"/>
+                <constraint firstAttribute="trailing" secondItem="3fE-d8-gZU" secondAttribute="trailing" constant="10" id="fc1-h0-ZhB"/>
+                <constraint firstItem="kA3-MA-A9M" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kT9-EM-P8G"/>
+                <constraint firstItem="vee-pi-CYM" firstAttribute="centerY" secondItem="kA3-MA-A9M" secondAttribute="centerY" id="pUl-iV-OS5"/>
+                <constraint firstItem="vee-pi-CYM" firstAttribute="centerX" secondItem="kA3-MA-A9M" secondAttribute="centerX" id="tGj-Hy-qfp"/>
+                <constraint firstItem="IWo-Ka-KKH" firstAttribute="centerY" secondItem="vee-pi-CYM" secondAttribute="centerY" id="ud4-LE-MMG"/>
+            </constraints>
+            <connections>
+                <outlet property="countLabel" destination="IWo-Ka-KKH" id="ayK-b2-qwX"/>
+                <outlet property="nameLabel" destination="VJM-uT-0Qx" id="uKT-cK-s9S"/>
+                <outlet property="scrollView" destination="3fE-d8-gZU" id="0PW-3E-I2s"/>
+                <outlet property="selectedButton" destination="kA3-MA-A9M" id="jNs-zA-B6e"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="115"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

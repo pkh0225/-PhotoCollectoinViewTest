@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="InputTitleCell" customModule="pkh0225" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="412" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="412" height="70"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="글 제목" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mOB-fq-le8">
+                        <rect key="frame" x="15" y="10" width="382" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                        <connections>
+                            <action selector="textFieldDidChange:" destination="gTV-IL-0wX" eventType="editingChanged" id="IK3-55-lP5"/>
+                        </connections>
+                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nkj-vt-gpf">
+                        <rect key="frame" x="15" y="69.5" width="382" height="0.5"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="g2H-Rr-M9v"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Nkj-vt-gpf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="6jX-Qc-ZFy"/>
+                <constraint firstItem="mOB-fq-le8" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="JEO-nt-uaK"/>
+                <constraint firstItem="mOB-fq-le8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Kus-0d-bOv"/>
+                <constraint firstAttribute="trailing" secondItem="Nkj-vt-gpf" secondAttribute="trailing" constant="15" id="kWo-5l-ido"/>
+                <constraint firstAttribute="bottom" secondItem="Nkj-vt-gpf" secondAttribute="bottom" id="mpL-M0-Z5u"/>
+                <constraint firstItem="mOB-fq-le8" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.714286" id="nUw-lV-iI7"/>
+                <constraint firstAttribute="trailing" secondItem="mOB-fq-le8" secondAttribute="trailing" constant="15" id="rhX-9h-e8C"/>
+            </constraints>
+            <connections>
+                <outlet property="textField" destination="mOB-fq-le8" id="08A-2L-H0y"/>
+            </connections>
+            <point key="canvasLocation" x="-26.086956521739133" y="124.55357142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
