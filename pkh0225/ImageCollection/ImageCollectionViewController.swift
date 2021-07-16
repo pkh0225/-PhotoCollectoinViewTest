@@ -47,7 +47,7 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
         super.viewDidLoad()
         titleBarViewController?.isBackButton = true
         titleBarViewController?.isSubmitButton = true
-        titleBarViewController?.submitTitle = "확인"
+        titleBarViewController?.submitTitle = "선택"
         titleBarViewController?.delegate = self
 
         setup()
