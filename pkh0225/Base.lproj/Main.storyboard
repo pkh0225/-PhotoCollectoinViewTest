@@ -201,7 +201,9 @@
                                             <constraint firstAttribute="width" secondItem="KZn-25-bsn" secondAttribute="height" multiplier="1:1" id="1qG-R5-RN3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="제출"/>
+                                        <state key="normal" title="제출">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="onSubmitButton:" destination="CAx-qP-cSo" eventType="touchUpInside" id="7Ol-ap-Rrt"/>
                                         </connections>
