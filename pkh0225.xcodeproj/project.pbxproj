@@ -341,8 +341,8 @@
 		5276B8DE26A01BF900C2E45C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				52E2207826A117FC001A214D /* UnslpashImageModel.swift */,
 				5276B8E326A0259C00C2E45C /* FleaMarketArticleModel.swift */,
+				52E2207826A117FC001A214D /* UnslpashImageModel.swift */,
 				5276B8C0269FD75B00C2E45C /* CategoryModel.swift */,
 				5276B8C2269FD78800C2E45C /* RegionModel.swift */,
 				52A6415826A5610E003D89FB /* PriceMedel.swift */,

@@ -22,16 +22,15 @@ class MainViewController: BaseTitleBarController {
         titleBarViewController?.isSubmitButton = true
         titleBarViewController?.delegate = self
 
+        reloadData()
+    }
+
+    func reloadData() {
         makeAdapterData {[weak self] adapterData in
             guard let self = self else { return }
             self.collectionView.adapterData = adapterData
             self.collectionView.reloadData()
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
     }
 
     /// 비동기 처리된 Adapter Data 생성
@@ -45,7 +44,8 @@ class MainViewController: BaseTitleBarController {
             do {
                 let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: nil,
                                                                     cellType: PhotoCell.self) { [weak self]  ( _, data) in
-                    guard let self = self else { return }
+                    guard let self = self, let data = data as? [UnslpashImageModel] else { return }
+                    self.data.images = data
                 }
                 sectionInfo.cells.append(cellInfo)
             }
@@ -73,12 +73,7 @@ class MainViewController: BaseTitleBarController {
                     vc.completionClosure = { [weak self] obj in
                         guard let self = self else { return }
                         self.data.category = obj
-
-                        self.makeAdapterData {[weak self] adapterData in
-                            guard let self = self else { return }
-                            self.collectionView.adapterData = adapterData
-                            self.collectionView.reloadData()
-                        }
+                        self.reloadData()
                     }
                 }
                 sectionInfo.cells.append(cellInfo)
@@ -99,17 +94,16 @@ class MainViewController: BaseTitleBarController {
                     vc.completionClosure = { [weak self] obj in
                         guard let self = self else { return }
                         self.data.region = obj
-                        self.makeAdapterData {[weak self] adapterData in
-                            guard let self = self else { return }
-                            self.collectionView.adapterData = adapterData
-                            self.collectionView.reloadData()
-                        }
+                        self.reloadData()
                     }
                 }
                 sectionInfo.cells.append(cellInfo)
             }
             do {
-                let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: nil,
+                if self.data.price == nil {
+                    self.data.price = PriceModel()
+                }
+                let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: self.data.price,
                                                                     cellType: InputPriceCell.self) { [weak self]  ( name, data) in
                     guard let self = self, let data = data as? PriceModel  else { return }
 //                    print("\(name): \(data)")
@@ -139,6 +133,10 @@ class MainViewController: BaseTitleBarController {
 extension MainViewController: TitleBarViewControllerDelegate {
     func onSubmitButton() {
         var errorMessages: [String] = []
+
+        if self.data.images.count < 1 {
+            errorMessages.append("- 이미지를 선택애주세요.")
+        }
 
         if self.data.title.isValid == false {
             errorMessages.append("- 글 제목을 입력애주세요.")

@@ -8,6 +8,7 @@
 import Foundation
 
 class FleaMarketArticleModel {
+    var images = [UnslpashImageModel]()
     var title: String = ""
     var content: String = ""
     var price: PriceModel?

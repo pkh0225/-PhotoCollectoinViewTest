@@ -23,6 +23,7 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
                 data.selectedCount = idx + 1
             }
             self.imageDetailViewController?.reloadData()
+            self.actionClosure?("", selectedItems)
         }
     }
     private var animationPageIndex: Int = 0

@@ -41,13 +41,16 @@ class CategoryViewController: BaseTitleBarController, RouterProtocol {
 
         setSelectData(id: selectedId)
 
+        reloadData()
+    }
+
+    func reloadData() {
         makeAdapterData { [weak self] adapterData in
             guard let self = self else { return }
             self.collectionView.adapterData = adapterData
             self.collectionView.reloadData()
         }
     }
-    
 
     /// 비동기 처리된 Adapter Data 생성
     /// - Parameter completion: UICollectionViewAdapterData
