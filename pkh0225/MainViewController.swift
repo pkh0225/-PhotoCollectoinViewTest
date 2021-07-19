@@ -28,7 +28,7 @@ class MainViewController: BaseTitleBarController {
         titleBarViewController?.isSubmitButton = true
         titleBarViewController?.delegate = self
         registerForNotifications()
-        hideKeyboardButton.goneWidth = true
+        hideKeyboardButton.gone(.width)
         reloadData()
         
     }
@@ -124,7 +124,7 @@ class MainViewController: BaseTitleBarController {
                 sectionInfo.cells.append(cellInfo)
             }
             do {
-                let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: nil,
+                let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: self.data.content,
                                                                     cellType: InputDescriptionCell.self) { [weak self]  ( _, data) in
                     guard let self = self, let data = data as? String else { return }
                     self.data.content = data
@@ -151,7 +151,13 @@ class MainViewController: BaseTitleBarController {
     }
 
     @IBAction func onAddTextButton(_ sender: UIButton) {
-
+        self.view.endEditing(true)
+        let vc = AddTextViewController.pushViewController()
+        vc.completionClosure = { [weak self] str in
+            guard let self = self else { return }
+            self.data.content = str
+            self.reloadData()
+        }
     }
     @IBAction func onHideKeyboardButton(_ sender: UIButton) {
         view.endEditing(true)
@@ -223,7 +229,13 @@ extension MainViewController {
         if animationDuration > 0 {
             UIView.animate(withDuration: TimeInterval(animationDuration), delay: 0.0, options: UIView.AnimationOptions(rawValue: UInt(animationCurveOption.rawValue)), animations: {
                 self.bottomContainerViewBottomConstraint.constant = height
-                self.hideKeyboardButton.goneWidth = height == 0
+                if height == 0 {
+                    self.hideKeyboardButton.gone(.width)
+                }
+                else {
+                    self.hideKeyboardButton.goneRemove(.width)
+                }
+
                 self.view.layoutIfNeeded()
             }) { finished in
                 self.collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)

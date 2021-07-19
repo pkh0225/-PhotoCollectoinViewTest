@@ -10,8 +10,6 @@ import UIKit
 class RegionViewController: BaseTitleBarController, RouterProtocol {
     static var storyboardName: String = "Main"
 
-    @IBOutlet weak var collectionView: UICollectionView!
-
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
@@ -152,7 +150,4 @@ extension RegionViewController: NavigationAnimatorAble {
     var popAnimation: PopAnimator? {
         self.popAnimator
     }
-
-
-
 }

@@ -127,5 +127,14 @@ extension String {
         return attributeString
     }
 
+    func height(maxWidth: CGFloat, font: UIFont) -> CGFloat {
+       return self.size(maxWidth: maxWidth, font: font).height
+   }
+
+    func size(maxWidth: CGFloat, font: UIFont) -> CGSize {
+        let constraintSize: CGSize = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
+        let boundingBox: CGRect = self.boundingRect(with: constraintSize, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
+        return CGSize(width: ceilUI(boundingBox.width), height: ceilUI(boundingBox.height))
+    }
 }
 

@@ -14,7 +14,7 @@ class InputDescriptionCell: UICollectionViewCell, UICollectionViewAdapterCellPro
     @IBOutlet weak var placeholderLabel: UILabel!
 
     var actionClosure: ActionClosure?
-    var data: SelectLabelCellModel?
+    var data: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,13 +26,13 @@ class InputDescriptionCell: UICollectionViewCell, UICollectionViewAdapterCellPro
     }
 
     func configure(_ data: Any?) {
-        guard let data = data as? SelectLabelCellModel else { return }
+        guard let data = data as? String, data.isValid else { return }
         self.data = data
-
+        self.textView.text = data
+        placeholderLabel.isHidden = true
     }
 
     func didSelect(collectionView: UICollectionView, indexPath: IndexPath) {
-        print("title: \(data?.title ?? "")")
 
     }
 

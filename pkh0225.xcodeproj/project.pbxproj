@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5202170926A5B82D00820B67 /* AddedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202170726A5B82D00820B67 /* AddedTextCell.swift */; };
+		5202170A26A5B82D00820B67 /* AddedTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5202170826A5B82D00820B67 /* AddedTextCell.xib */; };
 		5238E74426A52782003E5D70 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238E74326A52782003E5D70 /* UIImageViewExtension.swift */; };
 		5276B85C269FC42D00C2E45C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B85B269FC42D00C2E45C /* AppDelegate.swift */; };
 		5276B85E269FC42D00C2E45C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B85D269FC42D00C2E45C /* SceneDelegate.swift */; };
@@ -53,6 +55,7 @@
 		5276B8EF26A047E800C2E45C /* PhothAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B8ED26A047E800C2E45C /* PhothAddCell.swift */; };
 		5276B8F026A047E800C2E45C /* PhothAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5276B8EE26A047E800C2E45C /* PhothAddCell.xib */; };
 		52A6415926A5610E003D89FB /* PriceMedel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A6415826A5610E003D89FB /* PriceMedel.swift */; };
+		52A7DAA326A5A922009E3901 /* AddTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7DAA226A5A922009E3901 /* AddTextViewController.swift */; };
 		52E2206E26A10930001A214D /* UIViewControllerExtnsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E2206D26A10930001A214D /* UIViewControllerExtnsion.swift */; };
 		52E2207226A1136D001A214D /* InputTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E2207026A1136D001A214D /* InputTitleCell.xib */; };
 		52E2207326A1136D001A214D /* InputTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E2207126A1136D001A214D /* InputTitleCell.swift */; };
@@ -84,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5202170726A5B82D00820B67 /* AddedTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedTextCell.swift; sourceTree = "<group>"; };
+		5202170826A5B82D00820B67 /* AddedTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddedTextCell.xib; sourceTree = "<group>"; };
 		5238E74326A52782003E5D70 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		5276B858269FC42D00C2E45C /* pkh0225.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pkh0225.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5276B85B269FC42D00C2E45C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +141,7 @@
 		5276B8ED26A047E800C2E45C /* PhothAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhothAddCell.swift; sourceTree = "<group>"; };
 		5276B8EE26A047E800C2E45C /* PhothAddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhothAddCell.xib; sourceTree = "<group>"; };
 		52A6415826A5610E003D89FB /* PriceMedel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceMedel.swift; sourceTree = "<group>"; };
+		52A7DAA226A5A922009E3901 /* AddTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextViewController.swift; sourceTree = "<group>"; };
 		52E2206D26A10930001A214D /* UIViewControllerExtnsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtnsion.swift; sourceTree = "<group>"; };
 		52E2207026A1136D001A214D /* InputTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputTitleCell.xib; sourceTree = "<group>"; };
 		52E2207126A1136D001A214D /* InputTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTitleCell.swift; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 				5276B8BA269FCB2B00C2E45C /* Cell */,
 				5276B892269FC5EB00C2E45C /* Region */,
 				5276B891269FC5C800C2E45C /* Category */,
+				52A7DAA126A5A8FB009E3901 /* AddText */,
 				5276B85B269FC42D00C2E45C /* AppDelegate.swift */,
 				5276B85D269FC42D00C2E45C /* SceneDelegate.swift */,
 				5276B85F269FC42D00C2E45C /* MainViewController.swift */,
@@ -350,6 +357,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		52A7DAA126A5A8FB009E3901 /* AddText */ = {
+			isa = PBXGroup;
+			children = (
+				52A7DAA226A5A922009E3901 /* AddTextViewController.swift */,
+				5202170726A5B82D00820B67 /* AddedTextCell.swift */,
+				5202170826A5B82D00820B67 /* AddedTextCell.xib */,
+			);
+			path = AddText;
+			sourceTree = "<group>";
+		};
 		52E2207526A117D1001A214D /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,6 +506,7 @@
 				5276B8C7269FDB9C00C2E45C /* InputPriceCell.xib in Resources */,
 				5276B8CF269FEFC500C2E45C /* CategoryCell.xib in Resources */,
 				52E2208C26A11FD2001A214D /* DetailImageCell.xib in Resources */,
+				5202170A26A5B82D00820B67 /* AddedTextCell.xib in Resources */,
 				5276B8CB269FDBE700C2E45C /* InputDescriptionCell.xib in Resources */,
 				5276B865269FC42D00C2E45C /* Assets.xcassets in Resources */,
 				5276B8F026A047E800C2E45C /* PhothAddCell.xib in Resources */,
@@ -536,6 +554,7 @@
 				5276B8D1269FF17900C2E45C /* RouterProtocol.swift in Sources */,
 				5276B8B6269FC7FC00C2E45C /* NSObjectExtensions.swift in Sources */,
 				5276B8A1269FC75E00C2E45C /* UICollectionViewAdapter.swift in Sources */,
+				5202170926A5B82D00820B67 /* AddedTextCell.swift in Sources */,
 				5276B8C6269FDB9C00C2E45C /* InputPriceCell.swift in Sources */,
 				5276B8DA26A0007500C2E45C /* TitleBarViewController.swift in Sources */,
 				5276B8B1269FC76900C2E45C /* StringExtensions.swift in Sources */,
@@ -557,6 +576,7 @@
 				5276B8EF26A047E800C2E45C /* PhothAddCell.swift in Sources */,
 				5276B8BD269FCB6F00C2E45C /* SelectLabelCell.swift in Sources */,
 				52A6415926A5610E003D89FB /* PriceMedel.swift in Sources */,
+				52A7DAA326A5A922009E3901 /* AddTextViewController.swift in Sources */,
 				52E2207326A1136D001A214D /* InputTitleCell.swift in Sources */,
 				5276B8B9269FC80B00C2E45C /* PKHParser.swift in Sources */,
 				52E2208926A11FD2001A214D /* MainImageCell.swift in Sources */,

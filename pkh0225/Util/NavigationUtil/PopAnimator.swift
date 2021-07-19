@@ -39,7 +39,7 @@ class PopAnimator: NSObject   {
     public convenience init(animationType: NavigationAnimationType, tagetViewController: UIViewController, tagetView: UIView) {
         self.init(animationType: animationType, duration: 0.3, animation: nil)
         self.tagetViewController = tagetViewController
-        self.addTagetView(tagetView)
+        self.addTargetView(tagetView)
     }
     
     public init(animation: @escaping NavigationAnimationClosure){
@@ -55,7 +55,7 @@ class PopAnimator: NSObject   {
         self.animationCompletion = completion
     }
     
-    func addTagetView(_ tagetView: UIView) {
+    func addTargetView(_ tagetView: UIView) {
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureRecognizer))
         panRecognizer.delegate = self
         tagetView.addGestureRecognizer(panRecognizer)

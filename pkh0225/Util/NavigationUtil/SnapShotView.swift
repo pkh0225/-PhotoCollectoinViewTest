@@ -83,7 +83,7 @@ class SnapShotView: UIView {
     
     
     @objc func onBack(_ sender: UIButton) {
-        self.parentViewController?.navigationController?.popViewController(animated: true)
+//        self.parentViewController?.navigationController?.popViewController(animated: true)
     }
     
 }
