@@ -24,9 +24,9 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
 
     private lazy var accessQueue = DispatchQueue(label: "accessQueue_\(self.className)", qos: .userInitiated, attributes: .concurrent)
 
-    lazy var region: RegionModel = RegionModel(id: 1, regionName: "역삼동", townCount: 1)
+    var region: RegionModel?
 
-    var completionClosure: ((RegionModel) -> Void)? = nil
+    var completionClosure: ((RegionModel?) -> Void)? = nil
     var selectedId: Int = 0
 
     override func viewDidLoad() {
@@ -34,7 +34,6 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
 
         titleBarViewController?.isBackButton = true
         titleBarViewController?.delegate = self
-        twonCountLabe.attributedText = "근처 동네 \(region.townCount)개".underLine()
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         slider.addGestureRecognizer(tapGesture)
@@ -42,6 +41,12 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
         view.layoutIfNeeded()
         sliderBarView1.leadingConstraint = (sliderBackView.w / 3 ) + 2
         sliderBarView2.leadingConstraint = sliderBarView1.leadingConstraint * 2
+
+        if self.region == nil {
+            region = RegionModel(id: 1, regionName: "역삼동", townCount: 12, level: 2)
+        }
+
+        sliderSetValue(CGFloat((region?.level ?? 0) * 10))
     }
 
 
@@ -59,25 +64,31 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
 
     func sliderSetValue(_ setValue: CGFloat) {
         var value: CGFloat = 0
-        var count: Int = 0
+        var count: Int = 1
+        var level : Int = 0
         switch setValue {
         case 1...5:
             value = 0
             count = 1
+            level = 0
         case 6...15:
             value = 11
             count = 11
+            level = 1
         case 16...25:
             value = 21
             count = 15
+            level = 2
         case 26...30:
             value = 30
             count = 32
+            level = 4
         default:
             print("\(slider.value)")
         }
         sliderAnimation(value: value)
-        region.townCount = count
+        region?.townCount = count
+        region?.level = level
         twonCountLabe.attributedText = "근처 동네 \(count)개".underLine()
     }
 

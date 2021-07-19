@@ -59,21 +59,20 @@ class MainViewController: BaseTitleBarController {
             }
             do {
                 var contentObj: SelectLabelCellModel
-                if self.data.categoryID == 0 {
+                if self.data.category?.id ?? 0 == 0 {
                     contentObj = SelectLabelCellModel(title: "카테고리 선택")
                 }
                 else {
-                    contentObj = SelectLabelCellModel(title: self.data.categoryName)
+                    contentObj = SelectLabelCellModel(title: self.data.category?.categoryName ?? "")
                 }
                 let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: contentObj,
                                                                     cellType: SelectLabelCell.self) { [weak self]  ( _, data) in
                     guard let self = self else { return }
                     let vc = CategoryViewController.pushViewController()
-                    vc.selectedId = self.data.categoryID
+                    vc.selectedId = self.data.category?.id ?? 0
                     vc.completionClosure = { [weak self] obj in
                         guard let self = self else { return }
-                        self.data.categoryID = obj.id
-                        self.data.categoryName = obj.categoryName
+                        self.data.category = obj
 
                         self.makeAdapterData {[weak self] adapterData in
                             guard let self = self else { return }
@@ -86,23 +85,20 @@ class MainViewController: BaseTitleBarController {
             }
             do {
                 var contentObj: SelectLabelCellModel
-                if self.data.regionID == 0 {
+                if self.data.region?.id ?? 0 == 0 {
                     contentObj = SelectLabelCellModel(title: "게시글 보여줄 동네 고르기")
                 }
                 else {
-                    contentObj = SelectLabelCellModel(title: "\(self.data.regionNsme) 근처 동네 \(self.data.townCount)개")
+                    contentObj = SelectLabelCellModel(title: "\(self.data.region?.regionName ?? "") 근처 동네 \(self.data.region?.townCount ?? 0)개")
                 }
                 let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: contentObj,
                                                                     cellType: SelectLabelCell.self) { [weak self]  ( _, data) in
                     guard let self = self else { return }
                     let vc = RegioinViewController.pushViewController()
-                    vc.selectedId = self.data.categoryID
+                    vc.region = self.data.region
                     vc.completionClosure = { [weak self] obj in
                         guard let self = self else { return }
-                        self.data.regionID = obj.id
-                        self.data.regionNsme = obj.regionName
-                        self.data.townCount = obj.townCount
-
+                        self.data.region = obj
                         self.makeAdapterData {[weak self] adapterData in
                             guard let self = self else { return }
                             self.collectionView.adapterData = adapterData
@@ -115,18 +111,9 @@ class MainViewController: BaseTitleBarController {
             do {
                 let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: nil,
                                                                     cellType: InputPriceCell.self) { [weak self]  ( name, data) in
-                    guard let self = self  else { return }
+                    guard let self = self, let data = data as? PriceModel  else { return }
 //                    print("\(name): \(data)")
-                    if name == InputPriceCell.PRICE_KEY, let data = data as? String {
-                        guard data.isValid else {
-                            self.data.price = -1
-                            return
-                        }
-                        self.data.price = data.replace(",", "").toInt()
-                    }
-                    else if name == InputPriceCell.SUGGEST_KEY, let data = data as? Bool {
-                        self.data.isSuggestion = data
-                    }
+                    self.data.price = data
                 }
                 sectionInfo.cells.append(cellInfo)
             }
@@ -156,15 +143,15 @@ extension MainViewController: TitleBarViewControllerDelegate {
         if self.data.title.isValid == false {
             errorMessages.append("- 글 제목을 입력애주세요.")
         }
-        if self.data.categoryID == 0 {
+        if self.data.category?.id ?? 0 == 0 {
             errorMessages.append("- 카테고리를 선택해주세요.")
         }
 
-        if self.data.regionID == 0 {
+        if self.data.region?.id ?? 0 == 0 {
             errorMessages.append("- 동네를 선택해주세요.")
         }
 
-        if self.data.price < 0 {
+        if self.data.price?.price ?? -1 < 0 {
             errorMessages.append("- 가격을 입력해주세요.")
         }
 

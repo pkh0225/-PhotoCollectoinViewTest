@@ -52,6 +52,7 @@
 		5276B8EC26A03BD100C2E45C /* PhotoSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5276B8EA26A03BD100C2E45C /* PhotoSubCell.xib */; };
 		5276B8EF26A047E800C2E45C /* PhothAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B8ED26A047E800C2E45C /* PhothAddCell.swift */; };
 		5276B8F026A047E800C2E45C /* PhothAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5276B8EE26A047E800C2E45C /* PhothAddCell.xib */; };
+		52A6415926A5610E003D89FB /* PriceMedel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A6415826A5610E003D89FB /* PriceMedel.swift */; };
 		52E2206E26A10930001A214D /* UIViewControllerExtnsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E2206D26A10930001A214D /* UIViewControllerExtnsion.swift */; };
 		52E2207226A1136D001A214D /* InputTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E2207026A1136D001A214D /* InputTitleCell.xib */; };
 		52E2207326A1136D001A214D /* InputTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E2207126A1136D001A214D /* InputTitleCell.swift */; };
@@ -134,6 +135,7 @@
 		5276B8EA26A03BD100C2E45C /* PhotoSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSubCell.xib; sourceTree = "<group>"; };
 		5276B8ED26A047E800C2E45C /* PhothAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhothAddCell.swift; sourceTree = "<group>"; };
 		5276B8EE26A047E800C2E45C /* PhothAddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhothAddCell.xib; sourceTree = "<group>"; };
+		52A6415826A5610E003D89FB /* PriceMedel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceMedel.swift; sourceTree = "<group>"; };
 		52E2206D26A10930001A214D /* UIViewControllerExtnsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtnsion.swift; sourceTree = "<group>"; };
 		52E2207026A1136D001A214D /* InputTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputTitleCell.xib; sourceTree = "<group>"; };
 		52E2207126A1136D001A214D /* InputTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTitleCell.swift; sourceTree = "<group>"; };
@@ -235,7 +237,6 @@
 		5276B891269FC5C800C2E45C /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				5276B8C0269FD75B00C2E45C /* CategoryModel.swift */,
 				5276B88F269FC5BB00C2E45C /* CategoryViewController.swift */,
 				5276B8CC269FEFC500C2E45C /* CategoryCell.swift */,
 				5276B8CD269FEFC500C2E45C /* CategoryCell.xib */,
@@ -246,7 +247,6 @@
 		5276B892269FC5EB00C2E45C /* Region */ = {
 			isa = PBXGroup;
 			children = (
-				5276B8C2269FD78800C2E45C /* RegionModel.swift */,
 				5276B893269FC62300C2E45C /* RegioinViewController.swift */,
 			);
 			path = Region;
@@ -343,6 +343,9 @@
 			children = (
 				52E2207826A117FC001A214D /* UnslpashImageModel.swift */,
 				5276B8E326A0259C00C2E45C /* FleaMarketArticleModel.swift */,
+				5276B8C0269FD75B00C2E45C /* CategoryModel.swift */,
+				5276B8C2269FD78800C2E45C /* RegionModel.swift */,
+				52A6415826A5610E003D89FB /* PriceMedel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				5276B8C3269FD78800C2E45C /* RegionModel.swift in Sources */,
 				5276B8EF26A047E800C2E45C /* PhothAddCell.swift in Sources */,
 				5276B8BD269FCB6F00C2E45C /* SelectLabelCell.swift in Sources */,
+				52A6415926A5610E003D89FB /* PriceMedel.swift in Sources */,
 				52E2207326A1136D001A214D /* InputTitleCell.swift in Sources */,
 				5276B8B9269FC80B00C2E45C /* PKHParser.swift in Sources */,
 				52E2208926A11FD2001A214D /* MainImageCell.swift in Sources */,

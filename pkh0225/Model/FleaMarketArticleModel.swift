@@ -10,16 +10,7 @@ import Foundation
 class FleaMarketArticleModel {
     var title: String = ""
     var content: String = ""
-    var price: Int = -1 {
-        didSet {
-            isFreePrice = price == 0
-        }
-    }
-    var isFreePrice: Bool = false
-    var isSuggestion: Bool = false
-    var regionID: Int = 0
-    var regionNsme: String = ""
-    var townCount: Int = 0
-    var categoryID: Int = 0
-    var categoryName: String = ""
+    var price: PriceModel?
+    var region: RegionModel?
+    var category: CategoryModel?
 }

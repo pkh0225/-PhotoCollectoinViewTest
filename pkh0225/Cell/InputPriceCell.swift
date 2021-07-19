@@ -18,7 +18,7 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
     @IBOutlet weak var freeButton: UIButton!
 
     var actionClosure: ActionClosure?
-    var data: SelectLabelCellModel?
+    var data: PriceModel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,13 +30,12 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
     }
 
     func configure(_ data: Any?) {
-        guard let data = data as? SelectLabelCellModel else { return }
+        guard let data = data as? PriceModel else { return }
         self.data = data
 
     }
 
     func didSelect(collectionView: UICollectionView, indexPath: IndexPath) {
-        print("title: \(data?.title ?? "")")
     }
 
     func updateUI() {
@@ -85,7 +84,8 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
 
     @IBAction func onSuggestionButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        actionClosure?(Self.SUGGEST_KEY, sender.isSelected)
+        data?.isSuggestion = sender.isSelected
+        actionClosure?(Self.SUGGEST_KEY, data)
     }
 
     @IBAction func onFreeButton(_ sender: UIButton) {
@@ -93,8 +93,14 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
     }
 
     @IBAction func textFieldDidChange(_ sender: UITextField) {
-        actionClosure?(Self.PRICE_KEY, textField.text)
+        if let text = textField.text, text.isValid {
+            data?.price = text.replace(",", "").toInt()
+        }
+        else {
+            data?.price = -1
+        }
         updateUI()
+        actionClosure?(Self.PRICE_KEY, data)
     }
 }
 
