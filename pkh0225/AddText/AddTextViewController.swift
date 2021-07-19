@@ -65,7 +65,7 @@ class AddTextViewController: UIViewController, RouterProtocol {
             let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: subData,
                                                                 cellType: AddedTextCell.self) { [weak self]  (name, data) in
                 guard let self = self else { return }
-                print("\(name) data: \(data)")
+//                print("\(name) data: \(data)")
                 if name == AddedTextCell.SELECT_KEY, let data = data as? String {
                     self.completionClosure?(data)
                     self.pop()
