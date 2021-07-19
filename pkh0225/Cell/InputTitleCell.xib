@@ -19,7 +19,7 @@
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="글 제목" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mOB-fq-le8">
                         <rect key="frame" x="15" y="10" width="382" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                         <connections>
                             <action selector="textFieldDidChange:" destination="gTV-IL-0wX" eventType="editingChanged" id="IK3-55-lP5"/>
                         </connections>

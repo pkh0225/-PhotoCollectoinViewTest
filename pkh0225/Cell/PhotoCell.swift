@@ -25,7 +25,7 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
             self.imageDetailViewController?.reloadData()
         }
     }
-    private var showDetailPageIndex: Int = 0
+    private var animationPageIndex: Int = 0
 
     weak var imageDetailViewController: ImageDetailViewController?
 
@@ -68,10 +68,11 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
 
         for subData in selectedItems {
             let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: subData,
-                                                                cellType: PhotoSubCell.self) { [weak self]  ( name, data) in
+                                                                cellType: PhotoSubCell.self) { [weak self]  (name, data) in
                 guard let self = self else { return }
+                print("\(name) data: \(data)")
                 if name == PhotoSubCell.IMAGE_CLICK_KEY, let data = data as? (index:Int, image:UIImage) {
-                    self.showDetailPageIndex = data.index
+                    self.animationPageIndex = data.index
                     let vc = ImageDetailViewController.pushViewController()
                     vc.delegate = self
                     vc.imageDataList = self.selectedItems
@@ -110,31 +111,52 @@ extension PhotoCell: ImageCollectionViewControllerDelegate {
 
 extension PhotoCell: ImageDetailViewControllerDelegate {
     func didChange(index: Int) {
-        showDetailPageIndex = index
+        animationPageIndex = index + 1
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: false)
         collectionView.layoutIfNeeded()
+
+        print("\(#function) animationPageIndex: \(animationPageIndex)")
     }
 
     func getStartRect() -> CGRect {
-        if let cell = self.collectionView.cellForItem(at: IndexPath(row: self.showDetailPageIndex, section: 0)) as? PhotoSubCell {
-//                    cell.imageView.isHidden = true
+        if let cell = self.collectionView.cellForItem(at: IndexPath(row: self.animationPageIndex, section: 0)) as? PhotoSubCell {
+            print("\(#function) animationPageIndex: \(animationPageIndex)")
             return cell.getImageWindowsRect()
         }
         return .zero
     }
 
-    func willStartAnimation() {
-
+    func willPushStartAnimation() {
+        print(#function)
+        cellAllHiddenFalse()
+        cellHidden(isHidden: true, index: self.animationPageIndex)
     }
 
-    func didEndAnimation() {
+    func didPushEndAnimation() {
+        print(#function)
+        cellHidden(isHidden: false, index: self.animationPageIndex)
+    }
+
+    func willPopStartAnimation() {
+        print(#function)
+        cellAllHiddenFalse()
+        cellHidden(isHidden: true, index: self.animationPageIndex)
+    }
+
+    func didPopEndAnimation() {
+        print(#function)
+        cellHidden(isHidden: false, index: self.animationPageIndex)
         self.imageDetailViewController = nil
+    }
+
+    func panPopCanelAnimation() {
+        print(#function)
+        cellHidden(isHidden: false, index: self.animationPageIndex)
     }
 
     func didSelected(selected: Bool, data: UnslpashImageModel) {
         if selected {
             self.selectedItems.append(data)
-
         }
         else {
             self.selectedItems.remove(object: data)
@@ -144,4 +166,13 @@ extension PhotoCell: ImageDetailViewControllerDelegate {
     }
 
 
+    func cellAllHiddenFalse() {
+        self.collectionView.visibleCells.forEach({ $0.isHidden = false })
+    }
+
+    func cellHidden(isHidden: Bool, index: Int) {
+        if let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? PhotoSubCell {
+            cell.isHidden = isHidden
+        }
+    }
 }

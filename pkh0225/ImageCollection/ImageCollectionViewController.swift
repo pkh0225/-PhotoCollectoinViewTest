@@ -270,13 +270,30 @@ extension ImageCollectionViewController: ImageDetailViewControllerDelegate {
         collectionView.reloadData()
     }
 
-    func willStartAnimation() {
-
+    func willPushStartAnimation() {
+        self.collectionView.visibleCells.forEach { $0.isHidden = false }
+        cellHidden(isHidden: true, index: self.showDetailPageIndex)
     }
 
-    func didEndAnimation() {
-
+    func didPushEndAnimation() {
+        cellHidden(isHidden: false, index: self.showDetailPageIndex)
     }
 
+    func willPopStartAnimation() {
+        self.collectionView.visibleCells.forEach { $0.isHidden = false }
+        cellHidden(isHidden: true, index: self.showDetailPageIndex)
+    }
 
+    func didPopEndAnimation() {
+        cellHidden(isHidden: false, index: self.showDetailPageIndex)
+    }
+    func panPopCanelAnimation() {
+        cellHidden(isHidden: false, index: self.showDetailPageIndex)
+    }
+
+    func cellHidden(isHidden: Bool, index: Int) {
+        if let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) {
+            cell.isHidden = isHidden
+        }
+    }
 }

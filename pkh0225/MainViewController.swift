@@ -21,16 +21,17 @@ class MainViewController: BaseTitleBarController {
 
         titleBarViewController?.isSubmitButton = true
         titleBarViewController?.delegate = self
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
         makeAdapterData {[weak self] adapterData in
             guard let self = self else { return }
             self.collectionView.adapterData = adapterData
             self.collectionView.reloadData()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
 
     /// 비동기 처리된 Adapter Data 생성
@@ -73,6 +74,12 @@ class MainViewController: BaseTitleBarController {
                         guard let self = self else { return }
                         self.data.categoryID = obj.id
                         self.data.categoryName = obj.categoryName
+
+                        self.makeAdapterData {[weak self] adapterData in
+                            guard let self = self else { return }
+                            self.collectionView.adapterData = adapterData
+                            self.collectionView.reloadData()
+                        }
                     }
                 }
                 sectionInfo.cells.append(cellInfo)
@@ -94,6 +101,12 @@ class MainViewController: BaseTitleBarController {
                         guard let self = self else { return }
                         self.data.regionID = obj.id
                         self.data.regionNsme = obj.regionName
+
+                        self.makeAdapterData {[weak self] adapterData in
+                            guard let self = self else { return }
+                            self.collectionView.adapterData = adapterData
+                            self.collectionView.reloadData()
+                        }
                     }
                 }
                 sectionInfo.cells.append(cellInfo)

@@ -29,7 +29,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mG-L2-03z">
-                        <rect key="frame" x="7" y="35" width="46" height="30"/>
+                        <rect key="frame" x="0.0" y="20" width="60" height="60"/>
                         <connections>
                             <action selector="onImageButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Pff-JO-Jye"/>
                         </connections>
@@ -68,11 +68,11 @@
                 <constraint firstItem="5mG-L2-03z" firstAttribute="centerX" secondItem="2WO-YF-WUT" secondAttribute="centerX" id="Bau-xc-hkD"/>
                 <constraint firstItem="2WO-YF-WUT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Bgj-bA-4aJ"/>
                 <constraint firstItem="B1v-vj-BgW" firstAttribute="trailing" secondItem="2WO-YF-WUT" secondAttribute="trailing" constant="20" id="JRy-Tb-2aH"/>
-                <constraint firstItem="5mG-L2-03z" firstAttribute="width" secondItem="2WO-YF-WUT" secondAttribute="width" multiplier="0.766667" id="c3t-J2-z5J"/>
+                <constraint firstItem="5mG-L2-03z" firstAttribute="width" secondItem="2WO-YF-WUT" secondAttribute="width" id="c3t-J2-z5J"/>
                 <constraint firstAttribute="bottom" secondItem="2WO-YF-WUT" secondAttribute="bottom" id="jA1-OR-YAx"/>
                 <constraint firstItem="76i-sA-PZj" firstAttribute="trailing" secondItem="2WO-YF-WUT" secondAttribute="trailing" constant="8" id="jb6-8e-L04"/>
                 <constraint firstItem="5mG-L2-03z" firstAttribute="centerY" secondItem="2WO-YF-WUT" secondAttribute="centerY" id="n0L-As-xJ6"/>
-                <constraint firstItem="5mG-L2-03z" firstAttribute="height" secondItem="2WO-YF-WUT" secondAttribute="height" multiplier="0.5" id="qP2-Ri-dLm"/>
+                <constraint firstItem="5mG-L2-03z" firstAttribute="height" secondItem="2WO-YF-WUT" secondAttribute="height" id="qP2-Ri-dLm"/>
                 <constraint firstItem="B1v-vj-BgW" firstAttribute="top" secondItem="2WO-YF-WUT" secondAttribute="top" constant="-21.5" id="w7T-LI-I3k"/>
             </constraints>
             <connections>

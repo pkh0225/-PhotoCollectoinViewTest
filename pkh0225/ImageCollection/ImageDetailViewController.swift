@@ -7,11 +7,16 @@
 
 import UIKit
 
+private let ANIMATION_DURATUION = 0.2
+
 protocol ImageDetailViewControllerDelegate: AnyObject {
     func didChange(index: Int)
     func getStartRect() -> CGRect
-    func willStartAnimation()
-    func didEndAnimation()
+    func willPushStartAnimation()
+    func didPushEndAnimation()
+    func willPopStartAnimation()
+    func didPopEndAnimation()
+    func panPopCanelAnimation()
     func didSelected(selected: Bool, data: UnslpashImageModel)
 }
 
@@ -63,6 +68,14 @@ class ImageDetailViewController: UIViewController, RouterProtocol {
             self.nowIndex = horizontalNowPage
             self.delegate?.didChange(index: self.nowIndex)
         }
+
+//        collectionView.didScrollCallback { scrollView in
+//            let x: CGFloat = scrollView.contentOffset.x + (self.collectionView.frame.size.width / 2)
+//            let horizontalNowPage = Int( x / self.collectionView.frame.size.width)
+//            guard self.nowIndex != horizontalNowPage else { return }
+//            self.nowIndex = horizontalNowPage
+//            self.delegate?.didChange(index: self.nowIndex)
+//        }
 
         panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureRecognizer(_:)))
         view.addGestureRecognizer(panRecognizer!)
@@ -145,20 +158,29 @@ extension ImageDetailViewController: NavigationAnimatorAble {
         return self.popAnimator
     }
 
-    func pushAnimation(fromViewController: UIViewController, completion: @escaping () -> Void) {
-        self.delegate?.willStartAnimation()
+    func getImageCenter() -> CGPoint {
+        var rect = self.collectionView.frame
+        rect.w += collectionView.trailingConstraint // 이미지 오늘쪽 여백을 주기위해 마진값이 들어 있음
+        return rect.center
+    }
 
+    func getImageSize() -> CGSize {
+        return tempImgeView.image?.size.ratioSize(setWidth: self.view.frame.size.width) ?? .zero
+    }
+
+    func pushAnimation(fromViewController: UIViewController, completion: @escaping () -> Void) {
+        self.delegate?.willPushStartAnimation()
         view.backgroundColor = UIColor.clear
+        view.layoutIfNeeded()
         closeButton.alpha = 0
         tempImgeView.isHidden = false
         tempImgeView.image = defaultImage
         tempImgeView.frame = self.delegate?.getStartRect() ?? .zero
         collectionView.isHidden = true
-        view.layoutIfNeeded()
-        let newSize: CGSize = tempImgeView.image?.size.ratioSize(setWidth: self.view.frame.size.width) ?? .zero
-        let center: CGPoint = self.view.center
+        let newSize: CGSize = self.getImageSize()
+        let center: CGPoint = self.getImageCenter()
 
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration:ANIMATION_DURATUION, delay: 0, options: .curveEaseInOut, animations: {
             self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             self.tempImgeView.frame = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
             self.tempImgeView.center = center
@@ -167,7 +189,7 @@ extension ImageDetailViewController: NavigationAnimatorAble {
         }) { _ in
             self.tempImgeView.isHidden = true
             self.collectionView.isHidden = false
-            self.delegate?.didEndAnimation()
+            self.delegate?.didPushEndAnimation()
             completion()
         }
     }
@@ -178,24 +200,30 @@ extension ImageDetailViewController: NavigationAnimatorAble {
             return
         }
         guard let cell = collectionView.visibleCells.first as? DetailImageCell  else { return }
+        let newSize: CGSize = self.getImageSize()
+        let center: CGPoint = self.getImageCenter()
+
+
+        self.delegate?.willPopStartAnimation()
         self.tempImgeView.image = cell.imageView.image
 
         if popAnimator?.interactionController == nil {
             collectionView.isHidden = true
             tempImgeView.isHidden = false
-            let newSize: CGSize = tempImgeView.image?.size.ratioSize(setWidth: self.view.frame.size.width) ?? .zero
-            let center: CGPoint = self.view.center
+
             tempImgeView.frame = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
             tempImgeView.center = center
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            view.layoutIfNeeded()
+
+            UIView.animate(withDuration: ANIMATION_DURATUION, delay: 0, options: .curveEaseInOut, animations: {
                 self.view.backgroundColor = UIColor.clear
                 self.tempImgeView.frame = self.delegate?.getStartRect() ?? .zero
                 self.closeButton.alpha = 0
                 self.view.layoutIfNeeded()
             }) { _ in
-                self.delegate?.didEndAnimation()
                 self.collectionView.isHidden = false
                 self.tempImgeView.isHidden = true
+                self.delegate?.didPopEndAnimation()
                 completion()
             }
         }
@@ -223,15 +251,16 @@ extension ImageDetailViewController {
             if scrollView.zoomScale != 1.0 || isVerticalGesture == false || (velocity.y) < 0 {
                 return
             }
-            self.delegate?.didChange(index: self.nowIndex)
+//            self.delegate?.didChange(index: self.nowIndex)
+            self.delegate?.willPopStartAnimation()
             self.tempImgeView.image = cell.imageView.image
             if (navigationController?.viewControllers.count ?? 0) > 1 {
                 popAnimator?.interactionController = UIPercentDrivenInteractiveTransition()
                 navigationController?.popViewController(animated: true)
             }
             tempImgeView.isHidden = false
-            let newSize: CGSize = tempImgeView.image?.size.ratioSize(setWidth: self.view.frame.size.width) ?? .zero
-            let center: CGPoint = self.view.center
+            let newSize: CGSize = self.getImageSize()
+            let center: CGPoint = self.getImageCenter()
             tempImgeView.frame = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
             tempImgeView.center = center
         }
@@ -276,11 +305,11 @@ extension ImageDetailViewController {
         }
     }
     func panAnimationFinish() {
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: ANIMATION_DURATUION, animations: {
             self.popAnimator?.interactionController?.finish()
             self.tempImgeView.frame = self.delegate?.getStartRect() ?? .zero
         }) { _ in
-            self.delegate?.didEndAnimation()
+            self.delegate?.didPopEndAnimation()
             self.popAnimationCallBack?()
         }
     }
@@ -295,6 +324,7 @@ extension ImageDetailViewController {
             self.collectionView.isHidden = false
             self.tempImgeView.isHidden = true
             self.popAnimationCallBack?()
+            self.delegate?.panPopCanelAnimation()
         }
     }
 }
