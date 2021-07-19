@@ -42,7 +42,7 @@
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="P29-iV-KwL">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="uKl-Vv-k7g">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -53,7 +53,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f5y-Oq-jGG"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="f5y-Oq-jGG" firstAttribute="bottom" secondItem="P29-iV-KwL" secondAttribute="bottom" id="3FP-Nt-0qj"/>
                             <constraint firstItem="f5y-Oq-jGG" firstAttribute="top" secondItem="0Np-63-Ou9" secondAttribute="top" id="BTs-06-wWM"/>
@@ -92,7 +92,7 @@
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="97x-tb-OKE">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CVC-Ap-Fkc">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -103,7 +103,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XRZ-Rt-jMb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="97x-tb-OKE" firstAttribute="leading" secondItem="XRZ-Rt-jMb" secondAttribute="leading" id="09o-Se-sHt"/>
                             <constraint firstItem="97x-tb-OKE" firstAttribute="top" secondItem="wDk-uO-bVA" secondAttribute="bottom" id="4YZ-Kt-IH2"/>
@@ -328,7 +328,6 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리 선택" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmH-FX-FKv">
                                         <rect key="frame" x="160.5" y="11.5" width="93" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGt-bv-K76">
@@ -380,7 +379,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gy6-8X-90g"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="B4Y-z4-r4c" secondAttribute="trailing" id="RGM-c0-xll"/>
                             <constraint firstAttribute="top" secondItem="B4Y-z4-r4c" secondAttribute="top" id="a7u-cb-hCO"/>
@@ -420,6 +419,7 @@
                             </containerView>
                             <searchBar contentMode="redraw" placeholder="검색어를 입력해주세요." translatesAutoresizingMaskIntoConstraints="NO" id="abQ-Wc-pmE">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="I2l-NJ-PBg"/>
                                 </constraints>
@@ -430,7 +430,7 @@
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ge3-vq-UYq">
                                 <rect key="frame" x="0.0" y="139" width="414" height="723"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="RyV-sG-pMe">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -532,7 +532,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6ot-UP-j8E"/>
+        <segue reference="7Zf-bM-485"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="IMG_1" width="314.33334350585938" height="250.33332824707031"/>
