@@ -121,5 +121,11 @@ extension String {
         return ""
     }
 
+    func underLine() -> NSMutableAttributedString {
+        let attributeString = NSMutableAttributedString(string: self)
+        attributeString.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSRange(location: 0, length: attributeString.length))
+        return attributeString
+    }
+
 }
 

@@ -90,7 +90,7 @@ class MainViewController: BaseTitleBarController {
                     contentObj = SelectLabelCellModel(title: "게시글 보여줄 동네 고르기")
                 }
                 else {
-                    contentObj = SelectLabelCellModel(title: self.data.regionNsme)
+                    contentObj = SelectLabelCellModel(title: "\(self.data.regionNsme) 근처 동네 \(self.data.townCount)개")
                 }
                 let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: contentObj,
                                                                     cellType: SelectLabelCell.self) { [weak self]  ( _, data) in
@@ -101,6 +101,7 @@ class MainViewController: BaseTitleBarController {
                         guard let self = self else { return }
                         self.data.regionID = obj.id
                         self.data.regionNsme = obj.regionName
+                        self.data.townCount = obj.townCount
 
                         self.makeAdapterData {[weak self] adapterData in
                             guard let self = self else { return }

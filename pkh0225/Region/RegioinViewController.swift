@@ -12,14 +12,19 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var image1: UIImageView!
+    @IBOutlet weak var image2: UIImageView!
+    @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var image4: UIImageView!
+    @IBOutlet weak var sliderBarView1: UIView!
+    @IBOutlet weak var sliderBarView2: UIView!
+    @IBOutlet weak var twonCountLabe: UILabel!
+    @IBOutlet weak var sliderBackView: UIView!
+
     private lazy var accessQueue = DispatchQueue(label: "accessQueue_\(self.className)", qos: .userInitiated, attributes: .concurrent)
 
-    lazy var regions: [RegionModel] = {[
-        RegionModel(id: 1, regionName: "내동네"),
-        RegionModel(id: 2, regionName: "인접동네"),
-        RegionModel(id: 3, regionName: "근처동네")
-    ]
-    }()
+    lazy var region: RegionModel = RegionModel(id: 1, regionName: "역삼동", townCount: 1)
 
     var completionClosure: ((RegionModel) -> Void)? = nil
     var selectedId: Int = 0
@@ -28,59 +33,92 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
         super.viewDidLoad()
 
         titleBarViewController?.isBackButton = true
+        titleBarViewController?.delegate = self
+        twonCountLabe.attributedText = "근처 동네 \(region.townCount)개".underLine()
 
-        setSelectData(id: selectedId)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        slider.addGestureRecognizer(tapGesture)
 
-        makeAdapterData { [weak self] adapterData in
-            guard let self = self else { return }
-            self.collectionView.adapterData = adapterData
-            self.collectionView.reloadData()
-        }
-    }
-    
-
-    /// 비동기 처리된 Adapter Data 생성
-    /// - Parameter completion: UICollectionViewAdapterData
-    func makeAdapterData(completion: @escaping (_ adapterData: UICollectionViewAdapterData?) -> Void ) {
-        // 서버 통신이 들어가면 통기화 처리가 필요하기에 barrier 처리 됨
-        accessQueue.async(flags: .barrier) {
-            let adapterData = UICollectionViewAdapterData()
-            let sectionInfo = UICollectionViewAdapterData.SectionInfo()
-
-            for subData in self.regions {
-                let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: subData,
-                                                                    cellType: CategoryCell.self) { [weak self]  ( _, data) in
-                    guard let self = self, let data = data as? RegionModel else { return }
-
-                    self.setSelectData(id: data.id)
-                    self.completionClosure?(data)
-                    self.navigationController?.popViewController(animated: true)
-                }
-                sectionInfo.cells.append(cellInfo)
-
-            }
-
-            adapterData.sectionList.append(sectionInfo)
-            DispatchQueue.main.async {
-                completion(adapterData)
-            }
-        }
+        view.layoutIfNeeded()
+        sliderBarView1.leadingConstraint = (sliderBackView.w / 3 ) + 2
+        sliderBarView2.leadingConstraint = sliderBarView1.leadingConstraint * 2
     }
 
-    @discardableResult
-    func setSelectData(id: Int) -> RegionModel? {
-        var obj: RegionModel?
-        for data in regions {
-            if data.id == id {
-                data.isSelected = true
-                obj = data
-            }
-            else {
-                data.isSelected = false
-            }
+
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            let x: CGFloat = recognizer.location(in: slider).x
+//            vaue : slider.maximumValue = x : slider.w
+            var value = CGFloat(slider.maximumValue) * x / slider.w
+
+            value = max(CGFloat(slider.minimumValue), min(value, CGFloat(slider.maximumValue)))
+            sliderSetValue(value)
         }
 
-        return obj
     }
 
+    func sliderSetValue(_ setValue: CGFloat) {
+        var value: CGFloat = 0
+        var count: Int = 0
+        switch setValue {
+        case 1...5:
+            value = 0
+            count = 1
+        case 6...15:
+            value = 11
+            count = 11
+        case 16...25:
+            value = 21
+            count = 15
+        case 26...30:
+            value = 30
+            count = 32
+        default:
+            print("\(slider.value)")
+        }
+        sliderAnimation(value: value)
+        region.townCount = count
+        twonCountLabe.attributedText = "근처 동네 \(count)개".underLine()
+    }
+
+    func sliderAnimation(value: CGFloat) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
+            self.slider.setValue(Float(value), animated: true)
+            self.onSliderValueChange(self.slider)
+        }, completion: { _ in
+        })
+    }
+
+    @IBAction func onSliderTouchUp(_ sender: UISlider) {
+        sliderSetValue(CGFloat(sender.value))
+    }
+
+    @IBAction func onSliderValueChange(_ sender: UISlider) {
+        print("slider: \(sender.value)")
+        var remain = CGFloat(sender.value.truncatingRemainder(dividingBy: 10.0))
+        remain = remain == 0 ? 10 : remain
+        let raito: CGFloat = 1.0 - (remain / 10.0)
+        switch sender.value {
+        case 1...10:
+            image1.alpha = raito
+            image2.alpha = 1
+            image3.alpha = 1
+        case 11...20:
+            image1.alpha = 0
+            image2.alpha = raito
+            image3.alpha = 1
+        case 21...30:
+            image1.alpha = 0
+            image2.alpha = 0
+            image3.alpha = raito
+        default:
+            print("\(sender.value)")
+        }
+    }
+}
+
+extension RegioinViewController: TitleBarViewControllerDelegate {
+    func onBackButton() {
+        completionClosure?(region)
+    }
 }

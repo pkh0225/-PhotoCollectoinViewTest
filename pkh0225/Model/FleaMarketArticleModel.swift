@@ -19,6 +19,7 @@ class FleaMarketArticleModel {
     var isSuggestion: Bool = false
     var regionID: Int = 0
     var regionNsme: String = ""
+    var townCount: Int = 0
     var categoryID: Int = 0
     var categoryName: String = ""
 }

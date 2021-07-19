@@ -7,16 +7,14 @@
 
 import Foundation
 
-class RegionModel: CategoryCellProtocol {
-    var title: String { regionName }
-    var isSelected: Bool
+class RegionModel {
     var id: Int
     var regionName: String
+    var townCount: Int
 
-
-    init(id: Int, regionName: String, isSelected: Bool = false) {
+    init(id: Int, regionName: String, townCount: Int = 1) {
         self.id = id
         self.regionName = regionName
-        self.isSelected =  isSelected
+        self.townCount = townCount
     }
 }
