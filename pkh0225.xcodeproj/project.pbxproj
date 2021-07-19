@@ -17,7 +17,7 @@
 		5276B873269FC42D00C2E45C /* pkh0225Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B872269FC42D00C2E45C /* pkh0225Tests.swift */; };
 		5276B87E269FC42E00C2E45C /* pkh0225UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B87D269FC42E00C2E45C /* pkh0225UITests.swift */; };
 		5276B890269FC5BB00C2E45C /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B88F269FC5BB00C2E45C /* CategoryViewController.swift */; };
-		5276B894269FC62300C2E45C /* RegioinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B893269FC62300C2E45C /* RegioinViewController.swift */; };
+		5276B894269FC62300C2E45C /* RegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B893269FC62300C2E45C /* RegionViewController.swift */; };
 		5276B89A269FC75800C2E45C /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B896269FC75800C2E45C /* PopAnimator.swift */; };
 		5276B89B269FC75800C2E45C /* SnapShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B897269FC75800C2E45C /* SnapShotView.swift */; };
 		5276B89C269FC75800C2E45C /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B898269FC75800C2E45C /* PushAnimator.swift */; };
@@ -100,7 +100,7 @@
 		5276B87D269FC42E00C2E45C /* pkh0225UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pkh0225UITests.swift; sourceTree = "<group>"; };
 		5276B87F269FC42E00C2E45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5276B88F269FC5BB00C2E45C /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		5276B893269FC62300C2E45C /* RegioinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegioinViewController.swift; sourceTree = "<group>"; };
+		5276B893269FC62300C2E45C /* RegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionViewController.swift; sourceTree = "<group>"; };
 		5276B896269FC75800C2E45C /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		5276B897269FC75800C2E45C /* SnapShotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapShotView.swift; sourceTree = "<group>"; };
 		5276B898269FC75800C2E45C /* PushAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		5276B892269FC5EB00C2E45C /* Region */ = {
 			isa = PBXGroup;
 			children = (
-				5276B893269FC62300C2E45C /* RegioinViewController.swift */,
+				5276B893269FC62300C2E45C /* RegionViewController.swift */,
 			);
 			path = Region;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 				5276B89D269FC75800C2E45C /* NavigationManager.swift in Sources */,
 				5276B8CA269FDBE700C2E45C /* InputDescriptionCell.swift in Sources */,
 				5276B8E426A0259C00C2E45C /* FleaMarketArticleModel.swift in Sources */,
-				5276B894269FC62300C2E45C /* RegioinViewController.swift in Sources */,
+				5276B894269FC62300C2E45C /* RegionViewController.swift in Sources */,
 				5276B8C1269FD75B00C2E45C /* CategoryModel.swift in Sources */,
 				52E2208026A11DB2001A214D /* ImageCollectionViewController.swift in Sources */,
 				5276B8D1269FF17900C2E45C /* RouterProtocol.swift in Sources */,

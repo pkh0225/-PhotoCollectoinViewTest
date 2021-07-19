@@ -22,7 +22,7 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        textField.autocapitalizationType = .none
     }
 
     static func getSize(_ data: Any?, width: CGFloat) -> CGSize {
@@ -32,7 +32,6 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
     func configure(_ data: Any?) {
         guard let data = data as? PriceModel else { return }
         self.data = data
-
     }
 
     func didSelect(collectionView: UICollectionView, indexPath: IndexPath) {

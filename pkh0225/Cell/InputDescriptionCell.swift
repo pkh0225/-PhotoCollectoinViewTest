@@ -18,7 +18,7 @@ class InputDescriptionCell: UICollectionViewCell, UICollectionViewAdapterCellPro
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        textView.autocapitalizationType = .none
     }
 
     static func getSize(_ data: Any?, width: CGFloat) -> CGSize {

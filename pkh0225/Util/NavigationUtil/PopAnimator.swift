@@ -27,6 +27,7 @@ class PopAnimator: NSObject   {
         }
     }
     var isAnimation: Bool = true
+    var animationCompletion: (() -> Void)?
     
     public init(animationType: NavigationAnimationType, duration: TimeInterval = 0.2, animation: NavigationAnimationClosure? = nil){
 
@@ -48,6 +49,10 @@ class PopAnimator: NSObject   {
     
     func setAnimation(_ closure: @escaping NavigationAnimationClosure) -> Void {
         self.animation = closure
+    }
+
+    func setAnimationCompletion(_ completion: @escaping () -> Void) {
+        self.animationCompletion = completion
     }
     
     func addTagetView(_ tagetView: UIView) {
@@ -141,10 +146,10 @@ class PopAnimator: NSObject   {
                     d = 0
                     
                 case .left, .right:
-                    d = fabs(translation.x) / view.bounds.width
+                    d = abs(translation.x) / view.bounds.width
                     
                 case .up, .down:
-                    d = fabs(translation.y) / view.bounds.height
+                    d = abs(translation.y) / view.bounds.height
                     
                 }
 //                print(translation.y)
@@ -186,6 +191,7 @@ class PopAnimator: NSObject   {
                     isAnimation = false
                 }
                 self.interactionController = nil
+                self.animationCompletion?()
             }
             
         }

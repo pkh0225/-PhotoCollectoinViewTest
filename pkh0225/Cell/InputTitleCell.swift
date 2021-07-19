@@ -16,7 +16,7 @@ class InputTitleCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        textField.autocapitalizationType = .none
     }
 
     static func getSize(_ data: Any?, width: CGFloat) -> CGSize {

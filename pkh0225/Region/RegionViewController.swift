@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegioinViewController: BaseTitleBarController, RouterProtocol {
+class RegionViewController: BaseTitleBarController, RouterProtocol {
     static var storyboardName: String = "Main"
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,16 +24,23 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
 
     private lazy var accessQueue = DispatchQueue(label: "accessQueue_\(self.className)", qos: .userInitiated, attributes: .concurrent)
 
+    var popAnimator: PopAnimator?
     var region: RegionModel?
-
     var completionClosure: ((RegionModel?) -> Void)? = nil
     var selectedId: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleBarViewController?.isBackButton = true
+        titleBarViewController?.isSubmitButton = true
+        titleBarViewController?.submitTitle = "X"
         titleBarViewController?.delegate = self
+
+        self.popAnimator = PopAnimator(animationType: .up, tagetViewController: self, tagetView: self.view)
+        self.popAnimator?.setAnimationCompletion { [weak self] in
+            guard let self = self else { return }
+            self.onSubmitButton()
+        }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         slider.addGestureRecognizer(tapGesture)
@@ -46,7 +53,9 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
             region = RegionModel(id: 1, regionName: "역삼동", townCount: 12, level: 2)
         }
 
-        sliderSetValue(CGFloat((region?.level ?? 0) * 10))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.sliderSetValue(CGFloat((self.region?.level ?? 0) * 10))
+        }
     }
 
 
@@ -82,7 +91,7 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
         case 26...30:
             value = 30
             count = 32
-            level = 4
+            level = 3
         default:
             print("\(slider.value)")
         }
@@ -128,8 +137,22 @@ class RegioinViewController: BaseTitleBarController, RouterProtocol {
     }
 }
 
-extension RegioinViewController: TitleBarViewControllerDelegate {
-    func onBackButton() {
+extension RegionViewController: TitleBarViewControllerDelegate {
+    func onSubmitButton() {
         completionClosure?(region)
+        self.navigationController?.popViewController(animated: true)
     }
+}
+
+extension RegionViewController: NavigationAnimatorAble {
+    var pushAnimation: PushAnimator? {
+        PushAnimator(animationType: .up)
+    }
+
+    var popAnimation: PopAnimator? {
+        self.popAnimator
+    }
+
+
+
 }
