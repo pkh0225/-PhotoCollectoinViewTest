@@ -39,7 +39,7 @@ struct Request {
             assertionFailure("URL Failure")
             return
         }
-        print(url)
+//        print(url)
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"

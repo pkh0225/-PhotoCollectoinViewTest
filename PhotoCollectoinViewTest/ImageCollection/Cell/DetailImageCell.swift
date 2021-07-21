@@ -40,7 +40,7 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         scrollView.zoomScale = 1.0
         nameLabel.text = data.user?.username
         imageView.setUrlImage(data.urls?.regular, placeHolderImage: data.urls?.tempImage, backgroundColor: .black)
-        data.urls?.tempImage = nil 
+        data.urls?.tempImage = nil
         selectedButton.isSelected = data.isSeleected
         if data.selectedCount > 0 {
             countLabel.text = "\(data.selectedCount)"

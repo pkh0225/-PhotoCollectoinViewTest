@@ -39,7 +39,7 @@ class MainImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
     func configure(_ data: Any?) {
         guard let data = data as? UnslpashImageModel else { return }
         self.data = data
-        nameLabel.text = "\(data.user?.username ?? "")"
+        nameLabel.text = "  \(data.user?.username ?? "")  "
         imageView.setUrlImage(data.urls?.small, backgroundColor: UIColor(hexString: data.color))
         selectedButton.isSelected = data.isSeleected
         if data.selectedCount > 0 {
