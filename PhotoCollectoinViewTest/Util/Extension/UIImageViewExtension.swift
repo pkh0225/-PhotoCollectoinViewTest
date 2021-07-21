@@ -24,14 +24,20 @@ extension UIImageView {
         }
     }
 
-    func setUrlImage(_ urlString: String?, backgroundColor: UIColor? = nil) {
+    func getChachImage(urlString: String?) -> UIImage? {
+        guard let urlString = urlString, urlString.isValid else { return  nil }
+        return Self.UrlToImageCache?.object(forKey: urlString as NSString)
+    }
+
+    func setUrlImage(_ urlString: String?, placeHolderImage: UIImage? = nil, backgroundColor: UIColor? = nil, transitionAnimation: Bool = true) {
+        self.image =  placeHolderImage
+        self.backgroundColor = backgroundColor
+
         guard let urlString = urlString, urlString.isValid else { return }
-        if let cachedImage = Self.UrlToImageCache?.object(forKey: urlString as NSString) {
+        if let cachedImage = getChachImage(urlString: urlString) {
             self.image = cachedImage
             return
         }
-
-        self.backgroundColor = backgroundColor
 
         guard let url = URL(string: urlString) else { return }
         imageDataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, _, error) in
@@ -41,9 +47,15 @@ extension UIImageView {
             self.imageDataTask = nil
 
             DispatchQueue.main.async {
-                UIView.transition(with: self, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+                if transitionAnimation {
+                    UIView.transition(with: self, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+                        self.image = image
+                    }, completion: nil)
+                }
+                else {
                     self.image = image
-                }, completion: nil)
+                }
+
             }
 
             if Self.UrlToImageCache == nil {
@@ -54,6 +66,5 @@ extension UIImageView {
         }
 
         imageDataTask?.resume()
-
     }
 }

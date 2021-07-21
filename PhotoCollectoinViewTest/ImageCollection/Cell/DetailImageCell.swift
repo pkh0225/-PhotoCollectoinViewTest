@@ -17,7 +17,8 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
 
-
+    private var checkZoom1: Bool = false
+    private var checkZoom2: Bool = false
     var imageView = UIImageView()
     var actionClosure: ActionClosure?
     var data: UnslpashImageModel?
@@ -38,12 +39,8 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         self.data = data
         scrollView.zoomScale = 1.0
         nameLabel.text = data.user?.username
-        // 고해상도 이미지를 불러오기 전에 미리 보여주기 윈한 임시 이미지.
-        if let tempImage = data.urls?.tempImage {
-            imageView.image = tempImage
-            data.urls?.tempImage = nil
-        }
-        imageView.setUrlImage(data.urls?.regular, backgroundColor: .black)
+        imageView.setUrlImage(data.urls?.regular, placeHolderImage: data.urls?.tempImage, backgroundColor: .black)
+        data.urls?.tempImage = nil 
         selectedButton.isSelected = data.isSeleected
         if data.selectedCount > 0 {
             countLabel.text = "\(data.selectedCount)"
@@ -67,6 +64,8 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         }
         else {
             scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+            checkZoom2 = true
+            imageView.setUrlImage(data?.urls?.raw, placeHolderImage: imageView.image, backgroundColor: .black, transitionAnimation: false)
         }
     }
     @IBAction func onSelectedButton(_ sender: UIButton) {
@@ -80,5 +79,17 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
 extension DetailImageCell: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+
+        if scrollView.zoomScale > 1, checkZoom1 == false {
+            checkZoom1 = true
+            imageView.setUrlImage(data?.urls?.full, placeHolderImage: imageView.image, backgroundColor: .black, transitionAnimation: false)
+        }
+        else if scrollView.zoomScale > 3, checkZoom2 == false {
+            checkZoom2 = true
+            imageView.setUrlImage(data?.urls?.raw, placeHolderImage: imageView.image, backgroundColor: .black, transitionAnimation: false)
+        }
     }
 }

@@ -40,7 +40,7 @@ class MainImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
         guard let data = data as? UnslpashImageModel else { return }
         self.data = data
         nameLabel.text = "\(data.user?.username ?? "")"
-        imageView.setUrlImage(data.urls?.thumb, backgroundColor: UIColor(hexString: data.color))
+        imageView.setUrlImage(data.urls?.small, backgroundColor: UIColor(hexString: data.color))
         selectedButton.isSelected = data.isSeleected
         if data.selectedCount > 0 {
             countLabel.text = "\(data.selectedCount)"
