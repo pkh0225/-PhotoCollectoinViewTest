@@ -28,6 +28,11 @@ class InputDescriptionCell: UICollectionViewCell, UICollectionViewAdapterCellPro
     func configure(_ data: Any?) {
         guard let data = data as? String, data.isValid else { return }
         self.data = data
+        if self.textView.text != data {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.textView.becomeFirstResponder()
+            }
+        }
         self.textView.text = data
         placeholderLabel.isHidden = true
     }

@@ -35,8 +35,6 @@ class SelectLabelCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
     }
 
     func didSelect(collectionView: UICollectionView, indexPath: IndexPath) {
-        print("title: \(data?.title ?? "")")
-
         actionClosure?(#function, data)
     }
 

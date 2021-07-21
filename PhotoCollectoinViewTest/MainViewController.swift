@@ -155,7 +155,7 @@ class MainViewController: BaseTitleBarController {
         let vc = AddTextViewController.pushViewController()
         vc.completionClosure = { [weak self] str in
             guard let self = self else { return }
-            self.data.content = str
+            self.data.content += "\n\(str)"
             self.reloadData()
         }
     }
