@@ -37,7 +37,7 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         guard let data = data as? UnslpashImageModel else { return }
         self.data = data
         scrollView.zoomScale = 1.0
-        nameLabel.text = data.user?.username
+        nameLabel.text = "  \(data.user?.username ?? "")  "
         imageView.setUrlImage(data.urls?.regular, placeHolderImage: data.urls?.tempImage, backgroundColor: .black)
         data.urls?.tempImage = nil
         selectedButton.isSelected = data.isSeleected

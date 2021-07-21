@@ -58,18 +58,23 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="1 / 30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJM-uT-0Qx">
-                        <rect key="frame" x="15" y="270.5" width="31.5" height="14.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.029999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="10" y="270.5" width="31.5" height="14.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="IWo-Ka-KKH" firstAttribute="centerX" secondItem="vee-pi-CYM" secondAttribute="centerX" id="HTk-zL-CdD"/>
-                <constraint firstItem="VJM-uT-0Qx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="LeL-TF-o9q"/>
+                <constraint firstItem="VJM-uT-0Qx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="LeL-TF-o9q"/>
                 <constraint firstAttribute="bottom" secondItem="VJM-uT-0Qx" secondAttribute="bottom" constant="15" id="NTZ-nU-g50"/>
                 <constraint firstItem="kA3-MA-A9M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TVv-on-xdK"/>
                 <constraint firstItem="3fE-d8-gZU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="atW-Ok-zfa"/>
