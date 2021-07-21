@@ -91,7 +91,7 @@ class ImageDetailViewController: UIViewController, RouterProtocol {
                 let cellInfo = UICollectionViewAdapterData.CellInfo(contentObj: subData,
                                                                     sizeClosure: { [weak self] in
                                                                         guard let self = self else { return .zero }
-                                                                        return CGSize(width: self.collectionView.frame.size.w, height: self.collectionView.frame.size.height)
+                                                                        return CGSize(width: self.collectionView.frame.size.w + self.collectionView.trailingConstraint, height: self.collectionView.frame.size.height)
                                                                     },
                                                                     cellType: DetailImageCell.self) { [weak self] (name, data) in
                     guard let self = self, let data = data as? UnslpashImageModel else { return }

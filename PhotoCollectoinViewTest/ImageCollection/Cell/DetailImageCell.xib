@@ -75,7 +75,7 @@
                 <constraint firstItem="3fE-d8-gZU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="atW-Ok-zfa"/>
                 <constraint firstAttribute="bottom" secondItem="3fE-d8-gZU" secondAttribute="bottom" id="beh-HC-CTH"/>
                 <constraint firstItem="3fE-d8-gZU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bsg-y6-0HU"/>
-                <constraint firstAttribute="trailing" secondItem="3fE-d8-gZU" secondAttribute="trailing" constant="10" id="fc1-h0-ZhB"/>
+                <constraint firstAttribute="trailing" secondItem="3fE-d8-gZU" secondAttribute="trailing" id="fc1-h0-ZhB"/>
                 <constraint firstItem="kA3-MA-A9M" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kT9-EM-P8G"/>
                 <constraint firstItem="vee-pi-CYM" firstAttribute="centerY" secondItem="kA3-MA-A9M" secondAttribute="centerY" id="pUl-iV-OS5"/>
                 <constraint firstItem="vee-pi-CYM" firstAttribute="centerX" secondItem="kA3-MA-A9M" secondAttribute="centerX" id="tGj-Hy-qfp"/>
@@ -87,7 +87,7 @@
                 <outlet property="scrollView" destination="3fE-d8-gZU" id="0PW-3E-I2s"/>
                 <outlet property="selectedButton" destination="kA3-MA-A9M" id="jNs-zA-B6e"/>
             </connections>
-            <point key="canvasLocation" x="132" y="115"/>
+            <point key="canvasLocation" x="-270" y="108"/>
         </collectionViewCell>
     </objects>
     <resources>

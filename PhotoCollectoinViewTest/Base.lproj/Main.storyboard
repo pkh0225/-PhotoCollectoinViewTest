@@ -26,7 +26,7 @@
         <!--중고거래 글쓰기-->
         <scene sceneID="GyR-dX-EJW">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" title="중고거래 글쓰기" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oXX-7u-jbH" customClass="MainViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="중고거래 글쓰기" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oXX-7u-jbH" customClass="MainViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XqX-pI-oby">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,7 +155,7 @@
         <!--카테고리 선택-->
         <scene sceneID="bdc-Ef-n1w">
             <objects>
-                <viewController storyboardIdentifier="CategoryViewController" title="카테고리 선택" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qZS-o0-Y00" customClass="CategoryViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryViewController" title="카테고리 선택" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qZS-o0-Y00" customClass="CategoryViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FdN-Pl-5If">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,7 +204,7 @@
         <!--지역선택-->
         <scene sceneID="cfZ-9P-o9G">
             <objects>
-                <viewController storyboardIdentifier="RegionViewController" title="지역선택" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HcL-Ut-WiA" customClass="RegionViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegionViewController" title="지역선택" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HcL-Ut-WiA" customClass="RegionViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yjx-RF-ykQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -406,7 +406,7 @@
         <!--Title Bar View Controller-->
         <scene sceneID="qx9-6x-eKf">
             <objects>
-                <viewController storyboardIdentifier="TitleBarViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CAx-qP-cSo" customClass="TitleBarViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TitleBarViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CAx-qP-cSo" customClass="TitleBarViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vKe-uL-jh5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,7 +492,7 @@
         <!--이미지 선택-->
         <scene sceneID="erK-dn-Svt">
             <objects>
-                <viewController storyboardIdentifier="ImageCollectionViewController" title="이미지 선택" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CPF-Oj-Vaz" customClass="ImageCollectionViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageCollectionViewController" title="이미지 선택" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CPF-Oj-Vaz" customClass="ImageCollectionViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MHA-N7-nSU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -562,15 +562,15 @@
         <!--Image Detail View Controller-->
         <scene sceneID="Jqw-Ix-nMt">
             <objects>
-                <viewController storyboardIdentifier="ImageDetailViewController" id="oYX-r9-vY6" customClass="ImageDetailViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageDetailViewController" id="oYX-r9-vY6" customClass="ImageDetailViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vaL-4W-5IF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OFb-uT-q06">
-                                <rect key="frame" x="0.0" y="44" width="424" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="434" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="HCd-Do-Js8">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="HCd-Do-Js8">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -602,7 +602,7 @@
                         <viewLayoutGuide key="safeArea" id="6Se-Ag-ptD"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Se-Ag-ptD" firstAttribute="trailing" secondItem="OFb-uT-q06" secondAttribute="trailing" constant="-10" id="1eB-f0-KcN"/>
+                            <constraint firstItem="6Se-Ag-ptD" firstAttribute="trailing" secondItem="OFb-uT-q06" secondAttribute="trailing" constant="-20" id="1eB-f0-KcN"/>
                             <constraint firstItem="OFb-uT-q06" firstAttribute="leading" secondItem="6Se-Ag-ptD" secondAttribute="leading" id="87P-GD-Xk3"/>
                             <constraint firstItem="OFb-uT-q06" firstAttribute="top" secondItem="6Se-Ag-ptD" secondAttribute="top" id="UtQ-tu-Ub9"/>
                             <constraint firstItem="WZV-7w-ZVO" firstAttribute="top" secondItem="6Se-Ag-ptD" secondAttribute="top" id="VeT-JF-laG"/>
@@ -622,7 +622,7 @@
         <!--Add Text View Controller-->
         <scene sceneID="zrg-tA-Haa">
             <objects>
-                <viewController storyboardIdentifier="AddTextViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ksg-mf-DXx" customClass="AddTextViewController" customModule="pkh0225" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTextViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ksg-mf-DXx" customClass="AddTextViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZjI-xf-fMg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -17,8 +17,7 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
 
-    private var checkZoom1: Bool = false
-    private var checkZoom2: Bool = false
+    private var checkZoom: Bool = false
     var imageView = UIImageView()
     var actionClosure: ActionClosure?
     var data: UnslpashImageModel?
@@ -63,9 +62,13 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
         }
         else {
-            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
-            checkZoom2 = true
+            let point = gestureRecognizer?.location(in: scrollView) ?? .zero
+            let scale: CGFloat = 200
+            scrollView.zoom(to: CGRect(x: point.x - (scale / 2), y: point.y - (scale / 2), width: scale, height: scale), animated: true)
+            if checkZoom == false {
+            checkZoom = true
             imageView.setUrlImage(data?.urls?.raw, placeHolderImage: imageView.image, backgroundColor: .black, transitionAnimation: false)
+            }
         }
     }
     @IBAction func onSelectedButton(_ sender: UIButton) {
@@ -83,12 +86,8 @@ extension DetailImageCell: UIScrollViewDelegate {
 
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
 
-        if scrollView.zoomScale > 1, checkZoom1 == false {
-            checkZoom1 = true
-            imageView.setUrlImage(data?.urls?.full, placeHolderImage: imageView.image, backgroundColor: .black, transitionAnimation: false)
-        }
-        else if scrollView.zoomScale > 3, checkZoom2 == false {
-            checkZoom2 = true
+        if scrollView.zoomScale > 1, checkZoom == false {
+            checkZoom = true
             imageView.setUrlImage(data?.urls?.raw, placeHolderImage: imageView.image, backgroundColor: .black, transitionAnimation: false)
         }
     }

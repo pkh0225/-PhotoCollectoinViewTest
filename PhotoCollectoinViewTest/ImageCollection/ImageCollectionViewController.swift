@@ -102,6 +102,9 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
 
             self.makeAdapterData(requestData.results) { [weak self] adapterData in
                 guard let self = self, let adapterData = adapterData else { return }
+                if self.pageIndex == 1 {
+                    self.collectionView.contentOffset = .zero
+                }
                 if self.pageIndex < requestData.total_pages {
                     self.collectionView.adapterHasNext = true
                 }
