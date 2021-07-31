@@ -23,7 +23,7 @@ class AddedTextCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
 
     static func getSize(_ data: Any?, width: CGFloat) -> CGSize {
         guard let data = data as? String else { return .zero }
-        let cell = self.fromNib(cache: true)
+        let cell = self.fromXib(cache: true)
         var height = cell.h - cell.textLabel.h
         height += data.height(maxWidth: cell.w - (cell.w - cell.textLabel.w), font: cell.textLabel.font)
         return CGSize(width: width, height: height)

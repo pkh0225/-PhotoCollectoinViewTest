@@ -23,7 +23,7 @@ class PhotoSubCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
     }
 
     static func getSize(_ data: Any?, width: CGFloat) -> CGSize {
-        return fromNibSize()
+        return fromXibSize()
     }
 
     func configure(_ data: Any?) {

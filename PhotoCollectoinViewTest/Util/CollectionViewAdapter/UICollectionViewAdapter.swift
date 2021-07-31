@@ -130,7 +130,7 @@ protocol UICollectionViewAdapterCellProtocol: UICollectionReusableView {
 }
 extension UICollectionViewAdapterCellProtocol {
     static func getSize(_ data: Any? = nil, width: CGFloat) -> CGSize {
-        return self.fromNibSize()
+        return self.fromXibSize()
     }
     func willDisplay(){}
     func didEndDisplaying(){}
@@ -455,26 +455,3 @@ extension UICollectionView {
     }
 }
 
-
-fileprivate var CacheViewNibs = NSCache<NSString, UIView>()
-extension UIView {
-    
-    class func fromNib(cache: Bool = false) -> Self {
-        return fromNib(cache: cache, as: self)
-    }
-    
-    private class func fromNib<T>(cache: Bool = false, as type: T.Type) -> T {
-        if cache, let view = CacheViewNibs.object(forKey: self.className as NSString) {
-            return view as! T
-        }
-        let view: UIView = Bundle.main.loadNibNamed(self.className, owner: nil, options: nil)!.first as! UIView
-        if cache {
-            CacheViewNibs.setObject(view, forKey: self.className as NSString)
-        }
-        return view as! T
-    }
-    
-    class func fromNibSize() -> CGSize {
-        return fromNib(cache: true).frame.size
-    }
-}

@@ -20,7 +20,7 @@ class InputTitleCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
     }
 
     static func getSize(_ data: Any?, width: CGFloat) -> CGSize {
-        return CGSize(width: width, height: fromNibSize().h)
+        return CGSize(width: width, height: fromXibSize().h)
     }
 
     func configure(_ data: Any?) {
