@@ -1437,30 +1437,6 @@ extension UIView {
         }
     }
 }
-
-////MARK:- XIB
-fileprivate var CacheViewXibs = NSCache<NSString, UIView>()
-extension UIView {
-
-    class func fromXib(cache: Bool = false) -> Self {
-        return fromXib(cache: cache, as: self)
-    }
-
-    private class func fromXib<T>(cache: Bool = false, as type: T.Type) -> T {
-        if cache, let view = CacheViewXibs.object(forKey: self.className as NSString) {
-            return view as! T
-        }
-        let view: UIView = Bundle.main.loadNibNamed(self.className, owner: nil, options: nil)!.first as! UIView
-        if cache {
-            CacheViewXibs.setObject(view, forKey: self.className as NSString)
-        }
-        return view as! T
-    }
-
-    class func fromXibSize() -> CGSize {
-        return fromXib(cache: true).frame.size
-    }
-}
 #endif
 
 
