@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-932" y="-585"/>
         </scene>
-        <!--중고거래 글쓰기-->
+        <!--글쓰기-->
         <scene sceneID="GyR-dX-EJW">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" title="중고거래 글쓰기" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oXX-7u-jbH" customClass="MainViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="글쓰기" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oXX-7u-jbH" customClass="MainViewController" customModule="PhotoCollectoinViewTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XqX-pI-oby">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -789,7 +789,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Bcn-4J-hgu"/>
+        <segue reference="7Zf-bM-485"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="IMG_1" width="314.33334350585938" height="250.33332824707031"/>
