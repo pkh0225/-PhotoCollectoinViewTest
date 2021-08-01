@@ -73,6 +73,10 @@ class ImageDetailViewController: UIViewController, RouterProtocol {
         view.addGestureRecognizer(panRecognizer!)
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     @IBAction func onCloseButton(_ sender: UIButton) {
         self.delegate?.didChange(index: self.nowIndex)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
