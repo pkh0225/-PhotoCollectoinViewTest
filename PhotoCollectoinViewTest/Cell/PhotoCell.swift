@@ -10,7 +10,7 @@ import UIKit
 class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
     static var itemCount: Int = 1
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var subCollectionView: UICollectionView!
 
     var actionClosure: ActionClosure?
 
@@ -35,14 +35,13 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
         // Initialization code
     }
 
-    static func getSize(_ data: Any?, width: CGFloat) -> CGSize {
+    static func getSize(_ data: Any? = nil, width: CGFloat, collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
         return CGSize(width: width, height: fromXibSize().h)
     }
 
     func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
-
-        collectionView.adapterData = makeAdapterData()
-        collectionView.reloadData()
+        subCollectionView.adapterData = makeAdapterData()
+        subCollectionView.reloadData()
     }
 
     func didSelect(collectionView: UICollectionView, indexPath: IndexPath) {
@@ -83,11 +82,11 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
                 }
                 else if name == PhotoSubCell.IMAGE_REMOVE_KEY, let index = data as? Int {
                     self.selectedItems.remove(at: index - 1)
-                    self.collectionView.adapterData = self.makeAdapterData()
-                    self.collectionView.performBatchUpdates {
-                        self.collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+                    self.subCollectionView.adapterData = self.makeAdapterData()
+                    self.subCollectionView.performBatchUpdates {
+                        self.subCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
                     } completion: { _ in
-                        self.collectionView.reloadData()
+                        self.subCollectionView.reloadData()
                     }
 
 
@@ -105,22 +104,22 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
 extension PhotoCell: ImageCollectionViewControllerDelegate {
     func setSelectItems(items: [UnslpashImageModel]) {
         self.selectedItems.append(contentsOf: items)
-        collectionView.adapterData = makeAdapterData()
-        collectionView.reloadData()
+        subCollectionView.adapterData = makeAdapterData()
+        subCollectionView.reloadData()
     }
 }
 
 extension PhotoCell: ImageDetailViewControllerDelegate {
     func didChange(index: Int) {
         animationPageIndex = index + 1
-        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: false)
-        collectionView.layoutIfNeeded()
+        subCollectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: false)
+        subCollectionView.layoutIfNeeded()
 
         print("\(#function) animationPageIndex: \(animationPageIndex)")
     }
 
     func getStartRect() -> CGRect {
-        if let cell = self.collectionView.cellForItem(at: IndexPath(row: self.animationPageIndex, section: 0)) as? PhotoSubCell {
+        if let cell = self.subCollectionView.cellForItem(at: IndexPath(row: self.animationPageIndex, section: 0)) as? PhotoSubCell {
             print("\(#function) animationPageIndex: \(animationPageIndex)")
             return cell.getImageWindowsRect()
         }
@@ -162,17 +161,17 @@ extension PhotoCell: ImageDetailViewControllerDelegate {
         else {
             self.selectedItems.remove(object: data)
         }
-        self.collectionView.adapterData = self.makeAdapterData()
-        self.collectionView.reloadData()
+        self.subCollectionView.adapterData = self.makeAdapterData()
+        self.subCollectionView.reloadData()
     }
 
 
     func cellAllHiddenFalse() {
-        self.collectionView.visibleCells.forEach({ $0.isHidden = false })
+        self.subCollectionView.visibleCells.forEach({ $0.isHidden = false })
     }
 
     func cellHidden(isHidden: Bool, index: Int) {
-        if let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? PhotoSubCell {
+        if let cell = self.subCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? PhotoSubCell {
             cell.isHidden = isHidden
         }
     }

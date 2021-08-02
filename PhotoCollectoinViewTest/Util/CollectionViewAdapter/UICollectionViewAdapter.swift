@@ -207,14 +207,14 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let data = self.data else { return 0 }
-        return data.sectionList[section].cells.count
+        return data.sectionList[safe: section]?.cells.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         func defaultReturn() -> UICollectionViewCell { return collectionView.dequeueReusableCell(UICollectionViewCell.self, for: indexPath) }
 
         guard let data = self.data else { return defaultReturn() }
-        let cellInfo = data.sectionList[indexPath.section].cells[indexPath.row]
+        guard let cellInfo = data.sectionList[safe: indexPath.section]?.cells[safe: indexPath.row] else { return defaultReturn() }
         guard let cellType = cellInfo.type as? UICollectionViewCell.Type else { return defaultReturn() }
         defer {
             checkMoreData(collectionView)
@@ -232,7 +232,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
         func defaultReturn() -> UICollectionReusableView { return collectionView.dequeueReusableHeader(UICollectionReusableView.self, for: indexPath) }
         guard let data = self.data else { return defaultReturn() }
 
-        guard let cellInfo: UICollectionViewAdapterData.CellInfo = (kind == UICollectionView.elementKindSectionHeader) ? data.sectionList[indexPath.section].header : data.sectionList[indexPath.section].footer else { return defaultReturn() }
+        guard let cellInfo: UICollectionViewAdapterData.CellInfo = (kind == UICollectionView.elementKindSectionHeader) ? data.sectionList[safe: indexPath.section]?.header : data.sectionList[safe: indexPath.section]?.footer else { return defaultReturn() }
         let view = (kind == UICollectionView.elementKindSectionHeader) ? collectionView.dequeueReusableHeader(cellInfo.type, for: indexPath) : collectionView.dequeueReusableFooter(cellInfo.type, for: indexPath)
         if let view = view as? UICollectionViewAdapterCellProtocol {
             view.actionClosure = cellInfo.actionClosure
@@ -244,7 +244,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let data = self.data else { return .zero }
 
-        let cellInfo = data.sectionList[indexPath.section].cells[indexPath.row]
+        guard let cellInfo = data.sectionList[safe: indexPath.section]?.cells[safe: indexPath.row] else { return .zero }
         if let sizeClosure = cellInfo.sizeClosure {
             return sizeClosure()
         }
@@ -260,7 +260,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         guard let data = self.data else { return .zero }
-        guard let cellInfo = data.sectionList[section].header else { return .zero }
+        guard let cellInfo = data.sectionList[safe: section]?.header else { return .zero }
         if let sizeClosure = cellInfo.sizeClosure {
             return sizeClosure()
         }
@@ -269,7 +269,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         guard let data = self.data else { return .zero }
-        guard let cellInfo = data.sectionList[section].footer else { return .zero }
+        guard let cellInfo = data.sectionList[safe: section]?.footer else { return .zero }
         if let sizeClosure = cellInfo.sizeClosure {
             return sizeClosure()
         }
@@ -278,7 +278,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         guard let data = self.data else { return .zero }
-        let sectionInfo = data.sectionList[section]
+        guard let sectionInfo = data.sectionList[safe: section] else { return .zero }
         if sectionInfo.sectionInset != SectionInsetNotSupport {
             return sectionInfo.sectionInset
         }
@@ -292,7 +292,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         guard let data = data else { return 0 }
-        let sectionInfo = data.sectionList[section]
+        guard let sectionInfo = data.sectionList[safe: section] else { return 0 }
         if sectionInfo.minimumLineSpacing != -9999 {
             return sectionInfo.minimumLineSpacing
         }
@@ -306,7 +306,7 @@ class UICollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         guard let data = data else { return 0 }
-        let sectionInfo = data.sectionList[section]
+        guard let sectionInfo = data.sectionList[safe: section] else { return 0 }
         if sectionInfo.minimumInteritemSpacing != -9999 {
             return sectionInfo.minimumInteritemSpacing
         }

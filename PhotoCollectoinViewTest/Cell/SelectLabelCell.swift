@@ -23,7 +23,7 @@ class SelectLabelCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         // Initialization code
     }
 
-    static func getSize(_ data: Any?, width: CGFloat) -> CGSize {
+    static func getSize(_ data: Any? = nil, width: CGFloat, collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
         return CGSize(width: width, height: fromXibSize().h)
     }
 

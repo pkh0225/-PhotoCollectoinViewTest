@@ -27,7 +27,7 @@ class MainImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
     var actionClosure: ActionClosure? = nil
     var data: UnslpashImageModel?
 
-    static func getSize(_ data: Any? = nil, width: CGFloat) -> CGSize {
+    static func getSize(_ data: Any? = nil, width: CGFloat, collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
         return CGSize(width: width, height: width)
     }
 
