@@ -16,7 +16,7 @@ struct Request {
 
     static let per_page: Int = 30
 
-    static func getPhotos(query: String = "", pageIndex: Int, completion: @escaping ([String:Any]?, Error?) -> Void) {
+    static func getPhotos(query: String = "", pageIndex: Int, completion: @escaping ([String:Any]?, Error?) -> Void) -> URLSessionDataTask? {
         var urlComponent: URLComponents?
         if query.isValid {
             urlComponent = URLComponents(string: "\(API_SEARCH_URL)")
@@ -37,7 +37,7 @@ struct Request {
 
         guard let url = urlComponent?.url else {
             assertionFailure("URL Failure")
-            return
+            return nil
         }
 //        print(url)
 
@@ -45,7 +45,7 @@ struct Request {
         urlRequest.httpMethod = "GET"
         urlRequest.timeoutInterval = TimeInterval(10)
 
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
@@ -64,7 +64,10 @@ struct Request {
                 }
             }
 
-        }.resume()
+        }
+        task.resume()
+
+        return task
     }
 
 

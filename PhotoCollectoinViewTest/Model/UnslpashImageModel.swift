@@ -11,8 +11,8 @@ import UIKit
 class UnslpashImageModelList: PKHParser {
     var dataList = [UnslpashImageModel]()
 
-    static func getResetData(pageIndex: Int, completion: @escaping (Self) -> Void) {
-        Request.getPhotos(pageIndex: pageIndex) { requestData, error in
+    static func getResetData(pageIndex: Int, completion: @escaping (Self) -> Void) -> URLSessionDataTask? {
+        return Request.getPhotos(pageIndex: pageIndex) { requestData, error in
             guard let requestData = requestData else { return }
             Self.initAsync(map: requestData, completionHandler: { (obj: Self) in
                 completion(obj)
@@ -26,8 +26,8 @@ class UnslpashSearchImageModelList: PKHParser {
     var total_pages: Int = 0
     var results = [UnslpashImageModel]()
 
-    static func getResetData(query: String, pageIndex: Int, completion: @escaping (Self) -> Void) {
-        Request.getPhotos(query: query, pageIndex: pageIndex) { requestData, error in
+    static func getResetData(query: String, pageIndex: Int, completion: @escaping (Self) -> Void) -> URLSessionDataTask? {
+        return Request.getPhotos(query: query, pageIndex: pageIndex) { requestData, error in
             guard let requestData = requestData else { return }
             Self.initAsync(map: requestData, completionHandler: { (obj: Self) in
                 completion(obj)

@@ -15,13 +15,31 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
     static var storyboardName: String = "Main"
 
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
+    lazy var indicatorBackView: UIView = {
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        self.view.addSubview(v)
+        v.centerInSuperView()
+        v.autoresizingMask = []
+        v.backgroundColor = UIColor(hex: 0x000000, alpha: 0.7)
+        v.cornerRadius = 10
+        return v
+    }()
+
+    lazy var indicatorView: UIActivityIndicatorView = {
+        let i = UIActivityIndicatorView(style: .large)
+        indicatorBackView.addSubview(i)
+        i.centerInSuperView()
+        i.autoresizingMask = []
+        i.color = .white
+        return i
+    }()
 
     private let accessQueue = DispatchQueue(label: "accessQueue_ViewController", qos: .userInitiated, attributes: .concurrent)
     private var pageIndex: Int = 0
     private var imageDataList = [UnslpashImageModel]()
     private var showDetailPageIndex: Int = 0
+    private var urlTask: URLSessionDataTask?
 
     private var selectedItems = [UnslpashImageModel]() {
         willSet {
@@ -62,12 +80,22 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
 
     }
 
+    func startIndicatorView() {
+        indicatorBackView.isHidden = false
+        indicatorView.startAnimating()
+    }
+
+    func stopIndicatorView() {
+        indicatorBackView.isHidden = true
+        indicatorView.stopAnimating()
+    }
+
     func requestImageData() {
         pageIndex += 1
         if pageIndex == 1 {
-            indicatorView.startAnimating()
+            startIndicatorView()
         }
-        UnslpashImageModelList.getResetData(pageIndex: pageIndex) { requestData in
+        urlTask = UnslpashImageModelList.getResetData(pageIndex: pageIndex) { requestData in
             guard requestData.dataList.count > 0 else {
                 self.collectionView.adapterHasNext = false
                 return
@@ -83,7 +111,7 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
                 self.collectionView.adapterHasNext = true
                 self.setImageDataList(requestData.dataList)
                 self.setCollectionViewData(adapterData)
-                self.indicatorView.stopAnimating()
+                self.stopIndicatorView()
             }
         }
     }
@@ -91,9 +119,9 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
     func requestSearchData() {
         pageIndex += 1
         if pageIndex == 1 {
-            indicatorView.startAnimating()
+            startIndicatorView()
         }
-        UnslpashSearchImageModelList.getResetData(query: searchBar.text ?? "", pageIndex: pageIndex) { requestData in
+        urlTask = UnslpashSearchImageModelList.getResetData(query: searchBar.text ?? "", pageIndex: pageIndex) { requestData in
             guard requestData.results.count > 0 else {
                 self.collectionView.adapterHasNext = false
                 return
@@ -114,7 +142,7 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
                 }
                 self.setImageDataList(requestData.results)
                 self.setCollectionViewData(adapterData)
-                self.indicatorView.stopAnimating()
+                self.stopIndicatorView()
             }
         }
     }
@@ -211,6 +239,7 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
 //MARK: - UISearchBarDelegate
 extension ImageCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        urlTask?.cancel()
         if searchText.isValid {
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.onSearch), object: nil)
             self.perform(#selector(self.onSearch), with: nil, afterDelay: 0.2)

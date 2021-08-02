@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5202170926A5B82D00820B67 /* AddedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202170726A5B82D00820B67 /* AddedTextCell.swift */; };
 		5202170A26A5B82D00820B67 /* AddedTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5202170826A5B82D00820B67 /* AddedTextCell.xib */; };
+		521A350F26B7686000286F1D /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A350E26B7686000286F1D /* UIButtonExtension.swift */; };
 		5238E74426A52782003E5D70 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5238E74326A52782003E5D70 /* UIImageViewExtension.swift */; };
 		5276B85C269FC42D00C2E45C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B85B269FC42D00C2E45C /* AppDelegate.swift */; };
 		5276B85E269FC42D00C2E45C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5276B85D269FC42D00C2E45C /* SceneDelegate.swift */; };
@@ -89,6 +90,7 @@
 /* Begin PBXFileReference section */
 		5202170726A5B82D00820B67 /* AddedTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedTextCell.swift; sourceTree = "<group>"; };
 		5202170826A5B82D00820B67 /* AddedTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddedTextCell.xib; sourceTree = "<group>"; };
+		521A350E26B7686000286F1D /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		5238E74326A52782003E5D70 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		5276B858269FC42D00C2E45C /* PhotoCollectoinViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCollectoinViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5276B85B269FC42D00C2E45C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				5276B8AC269FC76900C2E45C /* CGRectExtension.swift */,
 				5276B8B5269FC7FC00C2E45C /* NSObjectExtensions.swift */,
 				52E2206D26A10930001A214D /* UIViewControllerExtnsion.swift */,
+				521A350E26B7686000286F1D /* UIButtonExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				52A6415926A5610E003D89FB /* PriceMedel.swift in Sources */,
 				52A7DAA326A5A922009E3901 /* AddTextViewController.swift in Sources */,
 				52E2207326A1136D001A214D /* InputTitleCell.swift in Sources */,
+				521A350F26B7686000286F1D /* UIButtonExtension.swift in Sources */,
 				5276B8B9269FC80B00C2E45C /* PKHParser.swift in Sources */,
 				52E2208926A11FD2001A214D /* MainImageCell.swift in Sources */,
 				5276B85E269FC42D00C2E45C /* SceneDelegate.swift in Sources */,

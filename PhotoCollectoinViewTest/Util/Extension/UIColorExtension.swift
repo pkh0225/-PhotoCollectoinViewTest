@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    public convenience init(hex col: UInt32, alpha: CGFloat = 1.0) {
+        let b = UInt8((col & 0xff))
+        let g = UInt8(((col >> 8) & 0xff))
+        let r = UInt8(((col >> 16) & 0xff))
+        self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
+    }
+    
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         var alpha = alpha
         var cString: String = hexString.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
