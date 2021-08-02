@@ -33,7 +33,7 @@ class DetailImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         setTapGesture()
     }
 
-    func configure(_ data: Any?) {
+    func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
         guard let data = data as? UnslpashImageModel else { return }
         self.data = data
         scrollView.zoomScale = 1.0

@@ -36,7 +36,7 @@ class MainImageCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
 
     }
 
-    func configure(_ data: Any?) {
+    func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
         guard let data = data as? UnslpashImageModel else { return }
         self.data = data
         nameLabel.text = "  \(data.user?.username ?? "")  "

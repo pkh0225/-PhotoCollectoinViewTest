@@ -8,7 +8,6 @@
 import UIKit
 
 class PhothAddCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
-
     static var itemCount: Int = 1
     @IBOutlet weak var countLabel: UILabel!
 
@@ -23,7 +22,7 @@ class PhothAddCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
         return fromXibSize()
     }
 
-    func configure(_ data: Any?) {
+    func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
         guard let data = data as? Int else { return }
         countLabel.text = "\(data)"
         if data > 0 {

@@ -27,7 +27,7 @@ class SelectLabelCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol
         return CGSize(width: width, height: fromXibSize().h)
     }
 
-    func configure(_ data: Any?) {
+    func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
         guard let data = data as? SelectLabelCellModel else { return }
         self.data = data
 

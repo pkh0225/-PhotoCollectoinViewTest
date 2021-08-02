@@ -29,7 +29,7 @@ class AddedTextCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
         return CGSize(width: width, height: height)
     }
 
-    func configure(_ data: Any?) {
+    func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
         guard let data = data as? String else { return }
         self.data = data
         textLabel.text = data

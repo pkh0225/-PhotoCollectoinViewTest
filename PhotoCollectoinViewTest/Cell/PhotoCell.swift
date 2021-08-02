@@ -39,7 +39,7 @@ class PhotoCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol {
         return CGSize(width: width, height: fromXibSize().h)
     }
 
-    func configure(_ data: Any?) {
+    func configure(_ data: Any?, subData: Any?, collectionView: UICollectionView, indexPath: IndexPath) {
 
         collectionView.adapterData = makeAdapterData()
         collectionView.reloadData()
