@@ -16,11 +16,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" contentInsetAdjustmentBehavior="never" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-d8-gZU">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentInsetAdjustmentBehavior="never" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-d8-gZU">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="contentLayoutGuide" id="c8T-11-eNv"/>
-                        <viewLayoutGuide key="frameLayoutGuide" id="Pkj-Tl-4zH"/>
                         <connections>
                             <outlet property="delegate" destination="gTV-IL-0wX" id="2im-yl-caA"/>
                         </connections>
