@@ -60,9 +60,8 @@ class ImageDetailViewController: UIViewController, RouterProtocol {
         }
 
 
-        collectionView.didEndDeceleratingCallback { scrollView in
-//            guard scrollView.isTracking else { return }
-            let x: CGFloat = scrollView.contentOffset.x
+        collectionView.didScrollCallback { scrollView in
+            let x: CGFloat = scrollView.contentOffset.x + (self.collectionView.frame.size.width / 2)
             let horizontalNowPage = Int( x / self.collectionView.frame.size.width)
             guard self.nowIndex != horizontalNowPage else { return }
             self.nowIndex = horizontalNowPage
