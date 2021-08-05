@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        UIImageView.diskCacheClear()
         UIImageView.checkDiskCacheAndRemove(totalCostLimit: 200)
         NotificationCenter.default.addObserver(forName:UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (_) in
             UIImageView.checkDiskCacheAndRemove(totalCostLimit: 200)
