@@ -8,6 +8,16 @@
 import Foundation
 import  UIKit
 
+func gcd_main_safe(_ block: @escaping () -> Void) {
+    if Thread.isMainThread {
+        block()
+    }
+    else {
+        DispatchQueue.main.async(execute: block)
+    }
+}
+
+
 extension UIImageView {
     private struct AssociatedKeys {
         static var imageDataTask: UInt8 = 0
@@ -22,17 +32,7 @@ extension UIImageView {
     }
 
     private static var UrlToImageCache: NSCache<NSString, UIImage>?
-
-    private var imageDataTask: URLSessionDataTask? {
-        get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.imageDataTask) as? URLSessionDataTask
-        }
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.imageDataTask, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-
-    private var accessQueue: DispatchQueue? {
+    private static var accessQueue: DispatchQueue? {
         get {
             if let q = objc_getAssociatedObject(self, &AssociatedKeys.imageDataTask) as? DispatchQueue {
                 return q
@@ -47,7 +47,16 @@ extension UIImageView {
         }
     }
 
-    func getMemoryCaach(urlString: String?) -> UIImage? {
+    private var imageDataTask: URLSessionDataTask? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.imageDataTask) as? URLSessionDataTask
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.imageDataTask, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    func getMemoryCache(urlString: String?) -> UIImage? {
         guard let urlString = urlString, urlString.isValid else { return  nil }
         return Self.UrlToImageCache?.object(forKey: urlString as NSString)
     }
@@ -57,14 +66,14 @@ extension UIImageView {
         if Self.UrlToImageCache == nil {
             Self.UrlToImageCache = NSCache<NSString, UIImage>()
             Self.UrlToImageCache?.countLimit = 100
-            Self.UrlToImageCache?.totalCostLimit = 50 * 1024 * 1024;
+            Self.UrlToImageCache?.totalCostLimit = 100 * 1024 * 1024;
         }
         if Self.UrlToImageCache?.object(forKey: urlString as NSString) == nil {
             Self.UrlToImageCache?.setObject(image, forKey: urlString as NSString)
         }
     }
 
-    func momoryCacheClear() {
+    static func momoryCacheClear() {
         Self.UrlToImageCache?.removeAllObjects()
     }
 
@@ -78,7 +87,7 @@ extension UIImageView {
         return fileName
     }
 
-    func saveDiskCaghe(urlString: String?, image: UIImage) {
+    func saveDiskCache(urlString: String?, image: UIImage) {
         guard let urlString = urlString else { return }
 
         guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return }
@@ -86,8 +95,6 @@ extension UIImageView {
         guard let fileName = self.getFileName(urlString: urlString) else { return }
         var filePath = URL(fileURLWithPath: path)
         filePath.appendPathComponent("image")
-
-
         if !FileManager.default.fileExists(atPath: filePath.path) {
             try? FileManager.default.createDirectory(atPath: filePath.path, withIntermediateDirectories: false, attributes: nil)
         }
@@ -132,38 +139,39 @@ extension UIImageView {
     }
 
     func getCacheImage(urlString: String, completion: @escaping (CacheType) -> Void) {
-        self.accessQueue?.async(flags: .barrier) {
-            if let image = self.getMemoryCaach(urlString: urlString) {
-                print("image memory Cache: \(urlString)")
-                DispatchQueue.main.sync {
-                    self.image = image
-                    self.backgroundColor = .none
-                }
-                return completion(.memory)
+        if let image = self.getMemoryCache(urlString: urlString) {
+            print("image memory Cache: \(urlString)")
+            gcd_main_safe {
+                self.image = image
+                self.backgroundColor = .none
             }
+            return completion(.memory)
+        }
+        else {
+            Self.accessQueue?.async(flags: .barrier) {
+                let result = self.getDiskCache(urlString: urlString)
+                switch result {
+                case .success(let image):
+                    print("image disk Cache: \(urlString)")
+                    gcd_main_safe {
+                        self.image = image
+                        self.backgroundColor = .none
+                    }
+                    self.saveMemoryCache(urlString: urlString, image: image)
+                    return completion(.disk)
 
-            let result = self.getDiskCache(urlString: urlString)
-            switch result {
-            case .success(let image):
-                print("image disk Cache: \(urlString)")
-                DispatchQueue.main.sync {
-                    self.image = image
-                    self.backgroundColor = .none
+                case .failure(_):
+    //                            print("getDiskCacheImage error : \(error)")
+                    return completion(.none)
                 }
-                self.saveMemoryCache(urlString: urlString, image: image)
-                return completion(.disk)
-
-            case .failure(_):
-//                            print("getDiskCacheImage error : \(error)")
-                return completion(.none)
             }
         }
     }
 
     func saveCacheImage(urlString: String?, image: UIImage) {
-        self.accessQueue?.async(flags: .barrier) {
-            self.saveMemoryCache(urlString: urlString, image: image)
-            self.saveDiskCaghe(urlString: urlString, image: image)
+        self.saveMemoryCache(urlString: urlString, image: image)
+        Self.accessQueue?.async(flags: .barrier) {
+            self.saveDiskCache(urlString: urlString, image: image)
         }
     }
 
@@ -175,21 +183,21 @@ extension UIImageView {
             return
         }
 
-        if !isEtage {
+        if cache, !isEtage {
             getCacheImage(urlString: urlString) { cacheType in
                 if cacheType == .none {
-                    self.setUrlImage(urlString, placeHolderImage: placeHolderImage, backgroundColor: backgroundColor, transitionAnimation: transitionAnimation, cache: false, isEtage: true)
+                    gcd_main_safe {
+                        self.setUrlImage(urlString, placeHolderImage: placeHolderImage, backgroundColor: backgroundColor, transitionAnimation: transitionAnimation, cache: false, isEtage: false)
+                    }
                 }
             }
         }
         else {
-            DispatchQueue.main.sync {
-                self.image =  placeHolderImage
-                self.backgroundColor = backgroundColor
-            }
+            self.image =  placeHolderImage
+            self.backgroundColor = backgroundColor
 
             var urlRequest = URLRequest(url: url)
-            if isEtage, cache, let eTag = UserDefaults.standard.object(forKey: "Etag_\(urlString)") as? String {
+            if isEtage, let eTag = UserDefaults.standard.object(forKey: "Etag_\(urlString)") as? String {
                 urlRequest.addValue(eTag, forHTTPHeaderField: "If-None-Match")
             }
 
@@ -203,18 +211,19 @@ extension UIImageView {
                 }
                 else if let response = response as? HTTPURLResponse {
                     // 변경되지 않음
-                    if cache, response.statusCode == 304 {
-                        //                    print("변경되지 않음")
+                    if response.statusCode == 304 {
+                        print("not change")
                         self.getCacheImage(urlString: urlString) { cacheType in
                             if cacheType == .none {
-                                DispatchQueue.main.async {
-                                    self.setUrlImage(urlString, placeHolderImage: placeHolderImage, backgroundColor: backgroundColor, transitionAnimation: transitionAnimation, cache: false)
+                                gcd_main_safe {
+                                    print("not cache retry")
+                                    self.setUrlImage(urlString, placeHolderImage: placeHolderImage, backgroundColor: backgroundColor, transitionAnimation: transitionAnimation, cache: false, isEtage: false)
                                 }
                             }
                         }
                     }
                     else if response.statusCode == 200, let data = data, let image = UIImage(data: data) {
-                        DispatchQueue.main.sync {
+                        gcd_main_safe {
                             if transitionAnimation {
                                 UIView.transition(with: self, duration: 0.25, options: [.transitionCrossDissolve], animations: {
                                     self.image = image
@@ -227,18 +236,15 @@ extension UIImageView {
                             }
                         }
 
-                        if isEtage, let etag = response.allHeaderFields["Etag"] as? String {
+                        if let etag = response.allHeaderFields["Etag"] as? String {
                             UserDefaults.standard.setValue(etag, forKey: "Etag_\(urlString)")
                         }
-
                         self.saveCacheImage(urlString: urlString, image: image)
                     }
                     else {
                         print("response.statusCode: \(response.statusCode)")
                     }
                 }
-
-
             }
 
             self.imageDataTask?.resume()
