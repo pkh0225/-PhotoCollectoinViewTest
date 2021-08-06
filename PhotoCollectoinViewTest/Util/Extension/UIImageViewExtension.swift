@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import  UIKit
+import UIKit
 
 func gcd_main_safe(_ block: @escaping () -> Void) {
     if Thread.isMainThread {
@@ -58,6 +58,7 @@ extension UIImageView {
 
     func setUrlImage(_ urlString: String?, placeHolderImage: UIImage? = nil, backgroundColor: UIColor? = nil, transitionAnimation: Bool = true, cache: Bool = true, isEtage: Bool = false) {
         imageDataTask?.cancel()
+        imageDataTask = nil
         guard let urlString = urlString, urlString.isValid, let url = URL(string: urlString) else {
             self.image =  placeHolderImage
             self.backgroundColor = backgroundColor
@@ -132,6 +133,7 @@ extension UIImageView {
         }
     }
 
+
     func getMemoryCache(urlString: String?) -> UIImage? {
         guard let urlString = urlString, urlString.isValid else { return  nil }
         return Self.UrlToImageCache?.object(forKey: urlString as NSString)
@@ -144,9 +146,12 @@ extension UIImageView {
             Self.UrlToImageCache?.countLimit = 100
             Self.UrlToImageCache?.totalCostLimit = 100 * 1024 * 1024;
         }
-        if Self.UrlToImageCache?.object(forKey: urlString as NSString) == nil {
-            Self.UrlToImageCache?.setObject(image, forKey: urlString as NSString)
-        }
+        Self.UrlToImageCache?.setObject(image, forKey: urlString as NSString)
+    }
+
+    func removeMemoryCache(urlString: String?) {
+        guard let urlString = urlString  else { return }
+        Self.UrlToImageCache?.removeObject(forKey: urlString as NSString)
     }
 
     static func momoryCacheClear() {
@@ -184,8 +189,25 @@ extension UIImageView {
         }
 
         filePath.appendPathComponent(fileName)
-        guard !FileManager.default.fileExists(atPath: filePath.path) else { return }
+//        guard !FileManager.default.fileExists(atPath: filePath.path) else { return }
         FileManager.default.createFile(atPath: filePath.path, contents: image.jpegData(compressionQuality: 1), attributes: nil)
+    }
+
+    func removeDiskCache(urlString: String?) {
+        guard let urlString = urlString else { return }
+
+        guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return }
+
+        guard let fileName = self.getFileName(urlString: urlString) else { return }
+        var filePath = URL(fileURLWithPath: path)
+        filePath.appendPathComponent("image")
+        if !FileManager.default.fileExists(atPath: filePath.path) {
+            try? FileManager.default.createDirectory(atPath: filePath.path, withIntermediateDirectories: false, attributes: nil)
+        }
+
+        filePath.appendPathComponent(fileName)
+        guard FileManager.default.fileExists(atPath: filePath.path) else { return }
+        try? FileManager.default.removeItem(atPath: filePath.path)
     }
 
     func getDiskCache(urlString: String?) -> Result<UIImage?, NSError> {
@@ -220,7 +242,6 @@ extension UIImageView {
         var filePath = URL(fileURLWithPath: path)
         filePath.appendPathComponent("image")
         try? FileManager.default.removeItem(at: filePath)
-        print(#function)
     }
 
     func getCacheImage(urlString: String, completion: @escaping (CacheType) -> Void) {
@@ -233,7 +254,7 @@ extension UIImageView {
             return completion(.memory)
         }
         else {
-            Self.accessQueue?.async(flags: .barrier) {
+            Self.accessQueue?.sync() {
                 let result = self.getDiskCache(urlString: urlString)
                 switch result {
                 case .success(let image):
@@ -257,6 +278,13 @@ extension UIImageView {
         self.saveMemoryCache(urlString: urlString, image: image)
         Self.accessQueue?.async(flags: .barrier) {
             self.saveDiskCache(urlString: urlString, image: image)
+        }
+    }
+
+    func removeCacheImage(urlString: String?) {
+        self.removeMemoryCache(urlString: urlString)
+        Self.accessQueue?.async(flags: .barrier) {
+            self.removeDiskCache(urlString: urlString)
         }
     }
 
@@ -310,4 +338,5 @@ extension UIImageView {
         }
         return false
     }
+
 }
