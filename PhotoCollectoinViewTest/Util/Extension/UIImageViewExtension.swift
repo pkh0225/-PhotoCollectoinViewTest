@@ -56,7 +56,7 @@ extension UIImageView {
         }
     }
 
-    func setUrlImage(_ urlString: String?, placeHolderImage: UIImage? = nil, backgroundColor: UIColor? = nil, transitionAnimation: Bool = true, cache: Bool = true, isEtage: Bool = false) {
+    func setUrlImage(_ urlString: String?, placeHolderImage: UIImage? = nil, backgroundColor: UIColor? = nil, transitionAnimation: Bool = true, cache: Bool = true, isEtage: Bool = true) {
         imageDataTask?.cancel()
         imageDataTask = nil
         guard let urlString = urlString, urlString.isValid, let url = URL(string: urlString) else {
