@@ -46,7 +46,7 @@ class InputPriceCell: UICollectionViewCell, UICollectionViewAdapterCellProtocol 
             }
         }
         else {
-            wonLabel.textColor = UIColor.systemGray3
+            wonLabel.textColor = UIColor.systemGray
             suggestionButton.isEnabled = false
             suggestionButton.isSelected = false
         }

@@ -27,12 +27,23 @@ class ImageCollectionViewController: BaseTitleBarController, RouterProtocol {
     }()
 
     lazy var indicatorView: UIActivityIndicatorView = {
-        let i = UIActivityIndicatorView(style: .large)
-        indicatorBackView.addSubview(i)
-        i.centerInSuperView()
-        i.autoresizingMask = []
-        i.color = .white
-        return i
+        if #available(iOS 13, *) {
+            let i = UIActivityIndicatorView(style: .large)
+            indicatorBackView.addSubview(i)
+            i.centerInSuperView()
+            i.autoresizingMask = []
+            i.color = .white
+            return i
+        }
+        else {
+            let i = UIActivityIndicatorView(style: .whiteLarge)
+            indicatorBackView.addSubview(i)
+            i.centerInSuperView()
+            i.autoresizingMask = []
+            i.color = .white
+            return i
+        }
+
     }()
 
     private let accessQueue = DispatchQueue(label: "accessQueue_ViewController", qos: .userInitiated, attributes: .concurrent)
